@@ -1,0 +1,34 @@
+# =========================
+# Decap CMS Config for Scotbase
+# =========================
+
+backend:
+  name: git-gateway       # works with Netlify Identity
+  branch: main            # your main Git branch
+
+media_folder: "public/uploads"   # where uploaded images are stored
+public_folder: "/uploads"        # how images are referenced in site
+
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "-"
+
+# =========================
+# Collections
+# =========================
+
+collections:
+  # -------------------------
+  # Categories Collection
+  # -------------------------
+  - name: "categories"
+    label: "Categories"
+    folder: "content/categories"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Category Name", name: "name", widget: "string" }
+      - label: "Parent Category"
+        name: "parent"
+        widget: "r
