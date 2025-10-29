@@ -21,7 +21,7 @@ function ArtistDetail() {
           // Get related artists
           const allArtists = await getAllArtists();
           const related = allArtists
-            .filter(a => a.genre === foundArtist.genre && a.id != id)
+            .filter(a => a.genre === foundArtist.genre && String(a.id) !== String(id))
             .slice(0, 3);
           setRelatedArtists(related);
         }
