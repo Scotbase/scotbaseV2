@@ -7,7 +7,8 @@ function Navbar() {
     <nav className="navbar">
       <div className="nav-container">
         <Link to="/" className="nav-logo">
-          🎵 Scotbase Entertainment
+          <img src="/images/scotbase-favicon.ico" alt="Scotbase Logo" className="nav-logo-icon" />
+          Scotbase Entertainment
         </Link>
         <ul className="nav-menu">
           <li className="nav-item">
