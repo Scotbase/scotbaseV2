@@ -89,8 +89,12 @@ function Artists() {
         {/* Results Count */}
         <div className="results-info">
           <p>
-            Showing {filteredArtists.length} tribute act{filteredArtists.length !== 1 ? 's' : ''}
-            {selectedTags.length > 0 && ` matching ${selectedTags.length} tag${selectedTags.length !== 1 ? 's' : ''}`}
+            Showing {filteredArtists.length} {
+              selectedParentCategory 
+                ? (filteredArtists.length === 1 ? selectedParentCategory.replace(/s$/, '') : selectedParentCategory)
+                : `tribute act${filteredArtists.length !== 1 ? 's' : ''}`
+            }
+            {selectedTags.length > 0 && ` with ${selectedTags.length} tag${selectedTags.length !== 1 ? 's' : ''}`}
           </p>
         </div>
 
