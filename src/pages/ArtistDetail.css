@@ -12,11 +12,12 @@
 }
 
 .artist-detail-image-container {
+  margin-top: 20px;
   position: relative;
   height: 100%;
   min-height: 600px;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--image-bg-gradient-start) 0%, var(--image-bg-gradient-end) 100%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .artist-detail-image {
@@ -34,7 +35,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, var(--image-overlay-detail) 0%, var(--image-overlay-detail-end) 100%);
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
   pointer-events: none;
 }
 
@@ -151,8 +152,10 @@
 
 .related-artists-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .related-artist-card {
@@ -163,6 +166,8 @@
   text-decoration: none;
   color: inherit;
   position: relative;
+  max-width: 280px;
+  width: 100%;
 }
 
 .related-artist-card:hover {
@@ -172,8 +177,7 @@
 
 .related-artist-card > div {
   position: relative;
-  height: 250px;
-  background: linear-gradient(135deg, var(--image-bg-gradient-start) 0%, var(--image-bg-gradient-end) 100%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   overflow: hidden;
 }
 
@@ -193,13 +197,16 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, var(--image-overlay-start) 0%, var(--image-overlay-end) 100%);
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
   pointer-events: none;
   z-index: 1;
 }
 
 .related-artist-info {
   padding: 1.5rem;
+  background: white;
+  position: relative;
+  z-index: 2;
 }
 
 .related-artist-info h4 {
@@ -209,7 +216,7 @@
 }
 
 .related-artist-info p {
-  color: #667eea;
+  color: #333;
   font-weight: 600;
 }
 
@@ -237,6 +244,12 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1200px) {
+  .related-artists-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 968px) {
   .artist-detail-hero {
     grid-template-columns: 1fr;
@@ -268,6 +281,21 @@
 
   .action-buttons .btn {
     width: 100%;
+  }
+
+  .related-artists-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .related-artists-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .related-artist-card {
+    max-width: 100%;
   }
 }
 

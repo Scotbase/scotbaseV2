@@ -3,6 +3,7 @@ import './FilterBar.css';
 
 function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParentCategoryChange, artists }) {
   const [expandedCategory, setExpandedCategory] = useState(null);
+  const [showTagFilters, setShowTagFilters] = useState(false); // Collapsed by default
 
   // Get all unique parent categories
   const getParentCategories = () => {
@@ -92,35 +93,49 @@ function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParen
         </div>
       )}
 
-      <div className="filter-header">
-        <h3>Filter by Tags</h3>
+      <button 
+        className="filter-header filter-header-toggle" 
+        onClick={() => setShowTagFilters(!showTagFilters)}
+      >
+        <h3>
+          <span className="arrow">{showTagFilters ? '▼' : '▶'}</span>
+          Filter by Tags
+        </h3>
         {selectedTags.length > 0 && (
-          <button className="clear-all-btn" onClick={handleClearAll}>
+          <button 
+            className="clear-all-btn" 
+            onClick={(e) => {
+              e.stopPropagation();
+              handleClearAll();
+            }}
+          >
             Clear All ({selectedTags.length})
           </button>
         )}
-      </div>
+      </button>
 
-      {/* Selected Tags Display */}
-      {selectedTags.length > 0 && (
-        <div className="selected-tags">
-          {selectedTags.map(tag => (
-            <span key={tag} className="selected-tag">
-              {tag}
-              <button 
-                className="remove-tag-btn"
-                onClick={() => handleTagToggle(tag)}
-                aria-label={`Remove ${tag}`}
-              >
-                ×
-              </button>
-            </span>
-          ))}
-        </div>
-      )}
+      {showTagFilters && (
+        <>
+          {/* Selected Tags Display */}
+          {selectedTags.length > 0 && (
+            <div className="selected-tags">
+              {selectedTags.map(tag => (
+                <span key={tag} className="selected-tag">
+                  {tag}
+                  <button 
+                    className="remove-tag-btn"
+                    onClick={() => handleTagToggle(tag)}
+                    aria-label={`Remove ${tag}`}
+                  >
+                    ×
+                  </button>
+                </span>
+              ))}
+            </div>
+          )}
 
-      {/* Filter Categories */}
-      <div className="filter-categories">
+          {/* Filter Categories */}
+          <div className="filter-categories">
         {Object.entries(tagCategories).map(([category, tags]) => (
           tags.length > 0 && (
             <div key={category} className="filter-category">
@@ -151,7 +166,9 @@ function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParen
             </div>
           )
         ))}
-      </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
