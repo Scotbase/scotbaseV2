@@ -1,12 +1,49 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { artists } from '../data/artists';
+import { getArtistById, getAllArtists } from '../data/dataLoader';
 import { handleImageError } from '../utils/imageHelper';
 import './ArtistDetail.css';
 
 function ArtistDetail() {
   const { id } = useParams();
-  const artist = artists.find(a => a.id === parseInt(id));
+  const [artist, setArtist] = useState(null);
+  const [relatedArtists, setRelatedArtists] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadArtist = async () => {
+      setLoading(true);
+      try {
+        const foundArtist = await getArtistById(id);
+        setArtist(foundArtist);
+
+        if (foundArtist) {
+          // Get related artists
+          const allArtists = await getAllArtists();
+          const related = allArtists
+            .filter(a => a.genre === foundArtist.genre && a.id != id)
+            .slice(0, 3);
+          setRelatedArtists(related);
+        }
+      } catch (error) {
+        console.error('Error loading artist:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadArtist();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="artist-detail-page">
+        <div className="loading-spinner">
+          <p>🎵 Loading act details...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!artist) {
     return (
@@ -17,10 +54,6 @@ function ArtistDetail() {
       </div>
     );
   }
-
-  const relatedArtists = artists
-    .filter(a => a.genre === artist.genre && a.id !== artist.id)
-    .slice(0, 3);
 
   return (
     <div className="artist-detail-page">

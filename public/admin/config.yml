@@ -2,12 +2,17 @@
 # Decap CMS Config for Scotbase
 # =========================
 
+# Production backend - uses GitHub via Netlify
 backend:
-  name: git-gateway       # works with Netlify Identity
-  branch: main            # your main Git branch
+  name: git-gateway
+  branch: main
 
-media_folder: "public/uploads"   # where uploaded images are stored
-public_folder: "/uploads"        # how images are referenced in site
+# For local testing only, uncomment this:
+# backend:
+#   name: test-repo
+
+media_folder: "public/images"   # where uploaded images are stored
+public_folder: "/images"        # how images are referenced in site
 
 slug:
   encoding: "ascii"
@@ -20,15 +25,46 @@ slug:
 
 collections:
   # -------------------------
-  # Categories Collection
+  # Acts/Artists Collection
   # -------------------------
-  - name: "categories"
-    label: "Categories"
-    folder: "content/categories"
+  - name: "acts"
+    label: "Tribute Acts"
+    folder: "public/content/acts"
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Category Name", name: "name", widget: "string" }
+      - { label: "Act Name", name: "title", widget: "string", required: false }
+      - { label: "Tribute To", name: "tribute", widget: "string", required: false }
+      - { label: "Image", name: "image", widget: "image", required: false }
       - label: "Parent Category"
-        name: "parent"
-        widget: "r
+        name: "parentCategory"
+        widget: "select"
+        required: false
+        options:
+          - Female Vocalists
+          - Male Vocalists
+          - Bands
+          - Cabaret Shows
+          - Comedy
+          - Scottish Shows
+          - Drag Queens
+          - Casino Nights
+      - { label: "Genre", name: "genre", widget: "select", options: ["Rock", "Pop", "Britpop", "Soul/Motown", "Soul/Jazz", "Blues/Soul", "Ska/Blues", "Ska", "Rock/Pop", "Pop/Soul"], required: false }
+      - { label: "Location", name: "location", widget: "string", required: false }
+      - { label: "Price Range", name: "price", widget: "string", required: false }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false, required: false }
+      - { label: "Availability", name: "availability", widget: "select", options: ["Available", "Limited", "Booked"], required: false }
+      - { label: "Booking Count", name: "bookingCount", widget: "number", default: 0, required: false }
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        required: false
+      - label: "Categories"
+        name: "categories"
+        widget: "list"
+        required: false
+      - label: "Keywords"
+        name: "keywords"
+        widget: "list"
+        required: false

@@ -35,6 +35,19 @@
   flex-wrap: wrap;
 }
 
+/* CMS Test Section */
+.cms-test-section {
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.cms-test-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin-bottom: 2rem;
+}
+
 /* Popular Artists Section */
 .popular-artists {
   padding: 4rem 2rem;

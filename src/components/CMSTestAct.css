@@ -1,0 +1,152 @@
+.cms-test-act {
+  margin: 2rem 0;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 12px;
+}
+
+.cms-banner {
+  text-align: center;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  background: white;
+  border: 2px dashed #667eea;
+}
+
+.cms-banner.success {
+  border-color: #4caf50;
+  background: #e8f5e9;
+}
+
+.cms-banner.error {
+  border-color: #f44336;
+  background: #ffebee;
+}
+
+.cms-badge {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #667eea;
+}
+
+.cms-banner.success .cms-badge {
+  color: #4caf50;
+}
+
+.cms-banner.error .cms-badge {
+  color: #f44336;
+}
+
+.cms-banner p {
+  margin: 0.5rem 0 0 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.cms-act-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cms-act-image {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+}
+
+.cms-act-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cms-act-image .featured-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #ffd700;
+  color: #333;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.cms-act-info {
+  padding: 1.5rem;
+}
+
+.cms-act-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.cms-act-info .tribute {
+  color: #667eea;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+}
+
+.cms-act-info .meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.cms-act-info .meta span {
+  background: #f5f5f5;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.cms-act-info .description {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.cms-act-info .tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.cms-act-info .tag {
+  background: #667eea;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .cms-test-act {
+    padding: 1rem;
+  }
+  
+  .cms-act-image {
+    height: 200px;
+  }
+  
+  .cms-act-info h3 {
+    font-size: 1.5rem;
+  }
+  
+  .cms-act-info .meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+

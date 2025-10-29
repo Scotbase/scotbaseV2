@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
 import './FilterBar.css';
 
-function FilterBar({ selectedTags, onTagsChange, artists }) {
+function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParentCategoryChange, artists }) {
   const [expandedCategory, setExpandedCategory] = useState(null);
+
+  // Get all unique parent categories
+  const getParentCategories = () => {
+    const categories = artists
+      .map(artist => artist.parentCategory)
+      .filter(cat => cat); // Remove undefined/null
+    return [...new Set(categories)].sort();
+  };
+
+  const parentCategories = getParentCategories();
 
   // Extract all unique tags by category
   const getTagsByCategory = () => {
@@ -58,6 +68,30 @@ function FilterBar({ selectedTags, onTagsChange, artists }) {
 
   return (
     <div className="filter-bar">
+      {/* Parent Category Filter */}
+      {parentCategories.length > 0 && (
+        <div className="parent-category-filter">
+          <h3>Browse by Category</h3>
+          <div className="parent-category-buttons">
+            <button
+              className={`parent-category-btn ${!selectedParentCategory ? 'selected' : ''}`}
+              onClick={() => onParentCategoryChange(null)}
+            >
+              All Acts
+            </button>
+            {parentCategories.map(category => (
+              <button
+                key={category}
+                className={`parent-category-btn ${selectedParentCategory === category ? 'selected' : ''}`}
+                onClick={() => onParentCategoryChange(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className="filter-header">
         <h3>Filter by Tags</h3>
         {selectedTags.length > 0 && (
