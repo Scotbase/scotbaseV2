@@ -26,7 +26,7 @@ function Home() {
           </p>
           <div className="hero-buttons">
             <Link to="/artists" className="btn btn-primary">
-              Browse Artists
+              Browse Tribute Acts
             </Link>
             <Link to="/contact" className="btn btn-secondary">
               Get in Touch
@@ -49,7 +49,7 @@ function Home() {
           </div>
           <div className="view-all-container">
             <Link to="/artists" className="btn btn-primary">
-              View All Artists
+              View All Tribute Acts
             </Link>
           </div>
         </div>

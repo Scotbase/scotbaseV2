@@ -7,7 +7,7 @@ function SearchBar({ searchTerm, onSearchChange }) {
       <input
         type="text"
         className="search-input"
-        placeholder="🔍 Search artists by name, tribute, genre or location..."
+        placeholder="🔍 Search by name, tribute, genre or location..."
         value={searchTerm}
         onChange={(e) => onSearchChange(e.target.value)}
       />

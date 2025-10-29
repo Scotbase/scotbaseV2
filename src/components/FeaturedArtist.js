@@ -8,7 +8,7 @@ function FeaturedArtist({ artist }) {
 
   return (
     <section className="featured-artist-section">
-      <h2 className="featured-title">⭐ Featured Artist of the Month</h2>
+      <h2 className="featured-title">⭐ Featured Act of the Month</h2>
       <div className="featured-artist">
         <div className="featured-image-container">
           <img 

@@ -11,7 +11,8 @@ export const artists = [
     featured: true,
     description: "Freddie Mercury tribute band Freddie & Queen Experience has all of Freddie's trademark moves, vocals and showmanship. This act never fails to entertain - a definite crowd pleaser! The Freddie & Queen Experience tribute band is made up of some of the best musicians in the UK, including arguably one of the best professional Brian May tributes, Andy Wills. With amazing vocals and harmonies, fabulous replica costumes, and energetic dancing, this is one of the best Queen tribute acts in the UK today.",
     availability: "Available",
-    bookingCount: 287
+    bookingCount: 287,
+    tags: ["rock", "70s", "80s", "group", "male", "classic-rock", "high-energy"]
   },
   {
     id: 2,
@@ -24,7 +25,8 @@ export const artists = [
     featured: false,
     description: "The Mercury & May tribute show is made up of some of the best musicians in the UK, including Ian Adams as Freddie and arguably one of the best professional Brian May tributes, Andy Wills. Hailed as the UK's premier tribute to the world's greatest showman! It consists of a full night of Queen and Freddie's greatest hits. With full replica costumes and reproducing Queen and Freddie's live shows, you are guaranteed a great night's entertainment.",
     availability: "Available",
-    bookingCount: 203
+    bookingCount: 203,
+    tags: ["rock", "70s", "80s", "duo", "male", "classic-rock", "high-energy"]
   },
   {
     id: 3,
@@ -37,7 +39,8 @@ export const artists = [
     featured: false,
     description: "Queen tribute band QE2 have over 20 years' experience and aim to recreate, with breathtaking accuracy, the style and excitement of a Queen concert. This is a must for Queen and Freddie Mercury fans. Along with the many fans that mourn the loss of Freddie Mercury, QE2 celebrate the wealth of talent that came together in Queen by recreating, with breathtaking accuracy, the style and excitement of a live Queen concert which, sadly, will never again be seen.",
     availability: "Available",
-    bookingCount: 176
+    bookingCount: 176,
+    tags: ["rock", "70s", "80s", "group", "male", "classic-rock", "high-energy"]
   },
 
   // OASIS TRIBUTES
@@ -52,7 +55,8 @@ export const artists = [
     featured: true,
     description: "Definitely Oasis are regarded by many Oasis fans and promoters alike as the best Oasis tribute band there is! The band regularly sell out top class venues across the UK and were recently the first ever tribute band to sell out Glasgow's iconic Garage Venue. With the real Oasis on an extended break at the moment this is definitely the next best thing Definitely Oasis do an amazing job of keeping the music alive and set the bar high by re-creating the Oasis look, sound and feel of an Oasis gig that fans come to expect.",
     availability: "Available",
-    bookingCount: 342
+    bookingCount: 342,
+    tags: ["britpop", "90s", "00s", "group", "male", "rock", "high-energy"]
   },
   {
     id: 5,
@@ -65,7 +69,8 @@ export const artists = [
     featured: false,
     description: "Noasis is the definitive tribute band to Manchester's five-piece super group Oasis. Since their formation in 2006 and with over 900 performances to date, Noasis has justly earned its reputation. With an obsessive attention to detail, the band recreates the real Oasis experience with amazing energy, playing all the classic songs as if they were their own. This is more than a tribute band - this is Oasis from a parallel universe.",
     availability: "Available",
-    bookingCount: 298
+    bookingCount: 298,
+    tags: ["britpop", "90s", "00s", "group", "male", "rock", "high-energy"]
   },
 
   // ABBA TRIBUTES
@@ -80,7 +85,8 @@ export const artists = [
     featured: false,
     description: "Mamma Mia! Our outstanding ABBA tribute duo is a sheer delight. Your dance floor is guaranteed to be jumping as they perform all the hits made famous by the Swedish pop stars. Dance your way into the seventies and book this ABBA tribute for a nostalgic evening of Swedish music that swept the world.",
     availability: "Available",
-    bookingCount: 156
+    bookingCount: 156,
+    tags: ["pop", "70s", "80s", "duo", "mixed", "disco", "dance"]
   },
   {
     id: 7,
@@ -93,7 +99,8 @@ export const artists = [
     featured: true,
     description: "The full ABBA experience with all four members! Mamma Mia! Our outstanding ABBA tribute quartet delivers an authentic recreation of the Swedish legends with fabulous costumes, harmonies and all the classic hits. Perfect for weddings, corporate events and themed parties.",
     availability: "Available",
-    bookingCount: 234
+    bookingCount: 234,
+    tags: ["pop", "70s", "80s", "quartet", "mixed", "disco", "dance"]
   },
   {
     id: 8,
@@ -106,7 +113,8 @@ export const artists = [
     featured: false,
     description: "Forever Abba brings all the magic of the Swedish superstars to life with spectacular costumes, perfect harmonies and an unforgettable show that will have everyone singing along to Dancing Queen, Waterloo and all the ABBA classics.",
     availability: "Available",
-    bookingCount: 189
+    bookingCount: 189,
+    tags: ["pop", "70s", "80s", "quartet", "mixed", "disco", "dance"]
   },
   {
     id: 9,
@@ -119,7 +127,8 @@ export const artists = [
     featured: false,
     description: "Gimme ABBA! Gimme ABBA! This fantastic tribute delivers all your favourite ABBA hits with style, energy and authenticity. Perfect entertainment for any venue or event.",
     availability: "Available",
-    bookingCount: 167
+    bookingCount: 167,
+    tags: ["pop", "70s", "80s", "quartet", "mixed", "disco", "dance"]
   },
   {
     id: 10,
@@ -132,7 +141,8 @@ export const artists = [
     featured: false,
     description: "Super Troopers bring the disco magic of ABBA to your venue with dazzling costumes, pitch-perfect vocals and all the hits that made ABBA the world's favourite pop group.",
     availability: "Available",
-    bookingCount: 145
+    bookingCount: 145,
+    tags: ["pop", "70s", "80s", "quartet", "mixed", "disco", "dance"]
   },
 
   // BEATLES TRIBUTES
@@ -147,7 +157,8 @@ export const artists = [
     featured: false,
     description: "Step into the swinging sixties with this authentic Beatles tribute duo. Celebrating the greatest rock and roll group of all time with their look, sound, mannerisms, accents and costumes. A fab visual and concert experience that appeals to audience members of all ages.",
     availability: "Available",
-    bookingCount: 123
+    bookingCount: 123,
+    tags: ["rock", "pop", "60s", "70s", "duo", "male", "classic-rock"]
   },
   {
     id: 12,
@@ -160,7 +171,8 @@ export const artists = [
     featured: false,
     description: "Them Beatles deliver the most authentic recreation of the Fab Four that you will find. It is their look, sound, mannerisms, accents, costumes, instrumentation and vocal harmonies that make this tribute stand out. Suitable for venues large and small.",
     availability: "Available",
-    bookingCount: 198
+    bookingCount: 198,
+    tags: ["rock", "pop", "60s", "70s", "quartet", "male", "classic-rock"]
   },
 
   // TAKE THAT TRIBUTES
@@ -175,7 +187,8 @@ export const artists = [
     featured: true,
     description: "Take That 2 have consistently kept the top spot as the UK's Number One tribute to Take That. With no expense spared and no corners cut this really is the most professional and realistic Take That tribute band available today. With live five part harmonies and live lead vocals all of the artists have studied every detail of their character in depth. The show comprises of Take That as a four piece singing all your favourites, including a solo spot from Mr Williams himself!",
     availability: "Available",
-    bookingCount: 267
+    bookingCount: 267,
+    tags: ["pop", "90s", "00s", "group", "male", "boyband", "dance"]
   },
   {
     id: 14,
@@ -188,7 +201,8 @@ export const artists = [
     featured: false,
     description: "Take Off That deliver an energetic and authentic tribute to one of the UK's most beloved boybands. With great vocals, choreography and stage presence, this show captures the essence of Take That perfectly.",
     availability: "Available",
-    bookingCount: 134
+    bookingCount: 134,
+    tags: ["pop", "90s", "00s", "group", "male", "boyband", "dance"]
   },
   {
     id: 15,
@@ -201,7 +215,8 @@ export const artists = [
     featured: false,
     description: "Take That Live are as close to the real band as possible. Costumes, vocals, routines & appearance are just like the real thing. They have been recognised as the best Take That Tribute Band by the Agents Association at the National Tribute Awards. They have featured on ITV, BBC3, and a documentary on E4. They cater for all venues and events from small parties to live outdoor festivals.",
     availability: "Limited",
-    bookingCount: 312
+    bookingCount: 312,
+    tags: ["pop", "90s", "00s", "group", "male", "boyband", "dance"]
   },
 
   // SPICE GIRLS TRIBUTES
@@ -216,7 +231,8 @@ export const artists = [
     featured: false,
     description: "This Spice Girls tribute band delivers a high-energy show with fabulous dance routines and audience participation. The show ensures an accurate portrayal and has the true impersonations of the sounds, look and feel of the sensational, very British Spice Girls live in concert. Featuring all the favourites including 'Wannabe', 'Who Do You Think You Are' and many more.",
     availability: "Available",
-    bookingCount: 189
+    bookingCount: 189,
+    tags: ["pop", "90s", "group", "female", "girlband", "dance", "high-energy"]
   },
   {
     id: 17,
@@ -229,7 +245,8 @@ export const artists = [
     featured: false,
     description: "Spice Girls tribute band Spicey Girls are the world's first, best and original tribute to the Spice Girls and have taken the world by storm, appearing on TV and in the national press. With live vocals, attractive looks and choreographed dance routines, these girls are oozing with personality and charisma. Every song a hit, every costume instantly recognisable.",
     availability: "Available",
-    bookingCount: 223
+    bookingCount: 223,
+    tags: ["pop", "90s", "group", "female", "girlband", "dance", "high-energy"]
   },
   {
     id: 18,
@@ -242,7 +259,8 @@ export const artists = [
     featured: false,
     description: "Girl power for the 21st century! With giant personalities, British accents and platform shoes, these five women deliver the ultimate 90's dance party, sharing a message of love, equality and, of course, girl power! Wannabe has travelled across North America, playing theatres, concert halls, clubs, casinos, outdoor festivals and campus stages.",
     availability: "Limited",
-    bookingCount: 178
+    bookingCount: 178,
+    tags: ["pop", "90s", "group", "female", "girlband", "dance", "high-energy"]
   },
 
   // BON JOVI TRIBUTES
@@ -257,7 +275,8 @@ export const artists = [
     featured: false,
     description: "This high-energy, electrically charged Bon Jovi tribute show is guaranteed to raise your hands and ticket sales. Bon Jovi Forever are committed to reviving the 80s/90s style show. The band come loaded with authentic signature guitars, stage clothes and a stunning light show with first-class sound system to ensure shows sound as good as they look. Every performance delivers 'Livin' on a Prayer', 'You Give Love a Bad Name', 'Wanted Dead or Alive' and all the hits!",
     availability: "Available",
-    bookingCount: 201
+    bookingCount: 201,
+    tags: ["rock", "80s", "90s", "group", "male", "high-energy"]
   },
   {
     id: 20,
@@ -270,7 +289,8 @@ export const artists = [
     featured: false,
     description: "Granada Television's 'Stars In Their Eyes' winner David Burrows is the UK's number one Bon Jovi tribute act. With the looks and voice of Bon Jovi, he brings the house down wherever he performs. If you're looking for a Bon Jovi tribute act, the superb Dave Burrows is your man.",
     availability: "Available",
-    bookingCount: 167
+    bookingCount: 167,
+    tags: ["rock", "80s", "90s", "solo", "male", "high-energy"]
   },
 
   // ADELE TRIBUTES
@@ -285,7 +305,8 @@ export const artists = [
     featured: false,
     description: "Adele tribute vocalist Corrine Oliver takes pride in being a big hit wherever she performs. Adele Atkins is one of the most successful acts in the world and Corrine Oliver captures the magic and soul of the megastar's fabulous songs. A true professional, her act comes with a fully programmed light show, backdrops and state-of-the-art sound equipment.",
     availability: "Available",
-    bookingCount: 143
+    bookingCount: 143,
+    tags: ["pop", "soul", "00s", "10s", "solo", "female", "ballads"]
   },
   {
     id: 22,
@@ -298,7 +319,8 @@ export const artists = [
     featured: false,
     description: "Jo Farrow has performed her Adele tribute all over the UK and receives accolades and re-bookings everywhere she goes. Covering all Adele's hits, Jo's powerful vocals put her in the elite Adele tribute category. A very popular choice for corporate events, weddings, hotels, holiday camps and social clubs.",
     availability: "Available",
-    bookingCount: 156
+    bookingCount: 156,
+    tags: ["pop", "soul", "00s", "10s", "solo", "female", "ballads"]
   },
   {
     id: 23,
@@ -311,7 +333,8 @@ export const artists = [
     featured: false,
     description: "Adele tribute vocalist Lareena Mitchell has an incredible resemblance to, and a wonderful voice to match, Adele. Lareena's 60-minute Adele tribute show is sure to blow you away, performing all the hits from albums 19, 21 and 25 including the classic hits 'Hello', 'Send My Love', 'Skyfall', 'Make You Feel My Love', 'Someone Like You', 'Rolling in the Deep' and many more.",
     availability: "Available",
-    bookingCount: 178
+    bookingCount: 178,
+    tags: ["pop", "soul", "00s", "10s", "solo", "female", "ballads"]
   },
   {
     id: 24,
@@ -324,7 +347,8 @@ export const artists = [
     featured: false,
     description: "Adele tribute vocalist Samantha J Mairs performs her tribute to the legendary Adele Adkins with confidence and massive talent. Samantha is a full-time musician with an outstanding reputation - simply one of the finest performers in the business. An extremely gifted vocalist and natural performer who effortlessly captures the true essence and soul of Adele's wonderful songs.",
     availability: "Available",
-    bookingCount: 189
+    bookingCount: 189,
+    tags: ["pop", "soul", "00s", "10s", "solo", "female", "ballads"]
   },
 
   // AMY WINEHOUSE TRIBUTES
@@ -339,7 +363,8 @@ export const artists = [
     featured: false,
     description: "Amy Winehouse tribute vocalist Keri has a special passion for Amy Winehouse, and her sterling performance as she pays tribute to Amy's music bears testimony to that. Keri will astound you as she emulates Ms Winehouse's unforgettable voice and makes her unique style her own. A truly sensational show.",
     availability: "Available",
-    bookingCount: 112
+    bookingCount: 112,
+    tags: ["soul", "jazz", "00s", "solo", "female", "retro"]
   },
   {
     id: 26,
@@ -352,7 +377,8 @@ export const artists = [
     featured: false,
     description: "Amy Winehouse tribute vocalist, the talented Nicole Marie, delivers an authentic Amy Winehouse experience. A sassy tribute performing all of Amy Winehouse's big hits with great dance routines and stunning costumes. Nicole Marie brings the house down at every show. This larger-than-life show comes fully contained with professional lighting, sound and backdrops.",
     availability: "Available",
-    bookingCount: 134
+    bookingCount: 134,
+    tags: ["soul", "jazz", "00s", "solo", "female", "retro"]
   },
 
   // BLUES BROTHERS TRIBUTES
@@ -367,7 +393,8 @@ export const artists = [
     featured: false,
     description: "The Birmingham Blues Brothers are a professional, full time, authentic Blues Brothers Tribute Show. They have been working for many major agents and clients in the UK and overseas for the past 15 years. Having built an excellent reputation for polished presentation and reliability. Can also supply a disco after the show with over 20,000 tracks available.",
     availability: "Available",
-    bookingCount: 187
+    bookingCount: 187,
+    tags: ["blues", "soul", "80s", "duo", "male", "retro", "high-energy"]
   },
   {
     id: 28,
@@ -380,7 +407,8 @@ export const artists = [
     featured: false,
     description: "Our tribute show to Madness and The Blues Brothers, The Mad Blues, are an energetic act with the feel-good factor. You'll be amazed at how authentic this show is. Playing all the hits from both bands, the boys' liveliness is contagious and the dance floor fills quickly. This act is suited to both small and large venues and is loved by audiences of all ages.",
     availability: "Available",
-    bookingCount: 156
+    bookingCount: 156,
+    tags: ["ska", "blues", "80s", "group", "male", "retro", "high-energy"]
   },
 
   // MADNESS TRIBUTES
@@ -395,7 +423,8 @@ export const artists = [
     featured: false,
     description: "Scotland's number one Madness tribute band is available as a 2/5/6/7 or 8-piece line-up covering all events. Whether it's a festival, outdoor show, tribute night, wedding or celebration, Ultimate Madness have performed at a variety of prestigious venues, functions and corporate events throughout the UK. Featuring the Ultimate Horns, this show has pizzazz!",
     availability: "Available",
-    bookingCount: 178
+    bookingCount: 178,
+    tags: ["ska", "80s", "90s", "group", "male", "high-energy", "retro"]
   },
   {
     id: 30,
@@ -408,7 +437,8 @@ export const artists = [
     featured: false,
     description: "Badness, the Madness and Ska tribute band, are amongst the leading tributes in the UK. Formed in 1994, Badness have established themselves as the premier tribute to the sounds of Madness, Bad Manners and Buster Bloodvessel. This show is full of fun and audience participation from the first note to the conclusion. You are in for an amazing experience when Badness comes to town!",
     availability: "Available",
-    bookingCount: 201
+    bookingCount: 201,
+    tags: ["ska", "80s", "90s", "group", "male", "high-energy", "retro"]
   },
 
   // WESTLIFE TRIBUTES
@@ -423,7 +453,8 @@ export const artists = [
     featured: false,
     description: "Westlife Live are an award-winning tribute band offering a live show experience as though you were at a real concert. This fabulous 4-piece band take to the stage attired in original Westlife costumes and combine exceptional vocal ability with a fantastic light show and the intricate Westlife dance routines. With fabulous vocals and harmonies, these guys give it their all!",
     availability: "Available",
-    bookingCount: 167
+    bookingCount: 167,
+    tags: ["pop", "90s", "00s", "quartet", "male", "boyband", "ballads"]
   },
   {
     id: 32,
@@ -436,7 +467,8 @@ export const artists = [
     featured: false,
     description: "Winner of the National Tribute Awards in the best boyband category, Simply Westlife provide outstanding vocals and tight dance routines throughout this fantastic energetic show. Performing since they were in their teens, the boys have great experience and knowledge of audiences and provide a breath-taking show enjoyed by all ages.",
     availability: "Available",
-    bookingCount: 145
+    bookingCount: 145,
+    tags: ["pop", "90s", "00s", "quartet", "male", "boyband", "ballads"]
   },
 
   // LITTLE MIX TRIBUTES
@@ -451,7 +483,8 @@ export const artists = [
     featured: false,
     description: "Britain's brightest Little Mix tribute act, Little Chix, pay homage to the music and style of Little Mix. This amazing new act brings together intricate four part harmonies and high-energy dance routines to create a real live concert atmosphere in any type of venue. This fully choreographed show features all of their current hits as well as unique renditions of their X Factor performances.",
     availability: "Available",
-    bookingCount: 134
+    bookingCount: 134,
+    tags: ["pop", "10s", "quartet", "female", "girlband", "dance", "high-energy"]
   },
   {
     id: 34,
@@ -464,7 +497,8 @@ export const artists = [
     featured: true,
     description: "Little Fix are the most accurate tribute to girl super group Little Mix on the market. In July 2017 the band won the 'National Tribute Music Awards' for the best Little Mix tribute act in the UK. Little Fix deliver a high-energy show and replicate the energy, stage presence and vocal abilities of the original group with stunning stage outfits to match. The band power through all of Little Mix's biggest hits with identical choreography and vocal finesse.",
     availability: "Available",
-    bookingCount: 223
+    bookingCount: 223,
+    tags: ["pop", "10s", "quartet", "female", "girlband", "dance", "high-energy"]
   },
   {
     id: 35,
@@ -477,7 +511,8 @@ export const artists = [
     featured: false,
     description: "Meet Little Mix tribute band, Little Mix Magic. An all-singing, all-dancing group of four gorgeous girls set to wow you with their unbeatable show! These energetic girls are fantastic vocalists and have fabulous costumes, providing a night of wonderful entertainment for venues of all sizes and appealing to all age groups.",
     availability: "Available",
-    bookingCount: 156
+    bookingCount: 156,
+    tags: ["pop", "10s", "quartet", "female", "girlband", "dance", "high-energy"]
   },
 
   // STEPS TRIBUTES
@@ -492,7 +527,8 @@ export const artists = [
     featured: false,
     description: "Steps tribute band The Steps Show are incredible, recreating the look and sound of those classic pop icons with fabulous choreography and amazing vocals! With amazing accuracy, the talented group perform the hits '5-6-7-8', 'Tragedy', 'One for Sorrow', 'Last Thing On My Mind', and more. The Steps Show incorporate some of the greatest cheesy pop 90's hits from other groups of this era, including S Club 7!",
     availability: "Available",
-    bookingCount: 123
+    bookingCount: 123,
+    tags: ["pop", "90s", "00s", "group", "mixed", "dance", "high-energy"]
   },
   {
     id: 37,
@@ -505,7 +541,8 @@ export const artists = [
     featured: false,
     description: "Steps tribute band Steps 2 is the UK's number one tribute to the nation's best loved pop group Steps! Steps 2 capture the high energy and fun of Steps in their heyday. Covering all the biggest, cheesiest pop hits that is sure to get everyone singing and dancing! Steps 2 recreate the pop party of the decade! This band caters to all ages!",
     availability: "Available",
-    bookingCount: 112
+    bookingCount: 112,
+    tags: ["pop", "90s", "00s", "group", "mixed", "dance", "high-energy"]
   },
 
   // ARIANA GRANDE TRIBUTES
@@ -520,7 +557,8 @@ export const artists = [
     featured: false,
     description: "Ariana tribute show, Simply Ariana, is fronted by the famous Scottish Rockette Gemma Lamont. Trained in the Estill Voice System, her technical training shines through as she effortlessly hits Ariana's impressive high notes. She not only mimics Ariana's vocal capabilities, but also her physicality, choreography and American accent. All shows come with two professional backing dancers.",
     availability: "Available",
-    bookingCount: 167
+    bookingCount: 167,
+    tags: ["pop", "10s", "solo", "female", "dance", "high-energy"]
   },
   {
     id: 39,
@@ -533,7 +571,8 @@ export const artists = [
     featured: false,
     description: "The Grande Experience tribute show, presented by Kearra Bethany, is a stunning tribute to American singer Ariana Grande. With a stunning lookalike/soundalike factor and featuring costume changes and dance routines, Kearra covers all the popular Ariana Grande hits with great accuracy. All shows come with two professional backing dancers.",
     availability: "Available",
-    bookingCount: 145
+    bookingCount: 145,
+    tags: ["pop", "10s", "solo", "female", "dance", "high-energy"]
   },
   {
     id: 40,
@@ -546,7 +585,8 @@ export const artists = [
     featured: false,
     description: "This Ariana tribute show, fronted by Amilia, is one tribute you must see. A big hit with everyone from adults, families and younger adults to children, Amilia presents a crowd-pleasing, all-round entertaining act. Amilia has been singing all her life and professionally since 2015. Her tribute to Ariana is born out of her own love for the American singing idol.",
     availability: "Available",
-    bookingCount: 98
+    bookingCount: 98,
+    tags: ["pop", "10s", "solo", "female", "dance", "high-energy"]
   },
 
   // BLONDIE TRIBUTES
@@ -561,7 +601,8 @@ export const artists = [
     featured: false,
     description: "An outstanding Blondie tribute featuring all the classic hits from one of punk and new wave's most iconic bands. Carrie Nicol captures the essence of Debbie Harry with style, attitude and all the hits including 'Heart of Glass', 'Call Me' and 'One Way or Another'.",
     availability: "Available",
-    bookingCount: 89
+    bookingCount: 89,
+    tags: ["rock", "pop", "70s", "80s", "solo", "female", "retro"]
   },
   {
     id: 42,
@@ -574,7 +615,8 @@ export const artists = [
     featured: false,
     description: "Dirty Harry brings the punk attitude and new wave sound of Blondie to life. With authentic costumes, powerful vocals and all the energy of the original band, this tribute delivers an unforgettable performance of all Blondie's greatest hits.",
     availability: "Available",
-    bookingCount: 103
+    bookingCount: 103,
+    tags: ["rock", "pop", "70s", "80s", "group", "mixed", "retro", "high-energy"]
   },
   {
     id: 43,
@@ -587,7 +629,8 @@ export const artists = [
     featured: false,
     description: "Fiona Shaw delivers a stunning Blondie tribute with powerful vocals and authentic style. Perfect for venues of all sizes, this tribute captures the punk rock spirit and new wave magic that made Blondie international superstars.",
     availability: "Available",
-    bookingCount: 87
+    bookingCount: 87,
+    tags: ["rock", "pop", "70s", "80s", "solo", "female", "retro"]
   },
 
   // MOTOWN TRIBUTES
@@ -602,7 +645,8 @@ export const artists = [
     featured: true,
     description: "The Angelettes Motown Tribute Show is a sensation. Watching these three beauties perform the classic hits from the Supremes, Martha Reeves, the Four Tops, the Temptations, Stevie Wonder and many more Motown stars is breathtaking. Fabulous costumes, amazing dance routines and fantastic vocal harmonies saw these impressive girls pick up the Best Tribute Act award at the Blackpool Command in 2015.",
     availability: "Available",
-    bookingCount: 234
+    bookingCount: 234,
+    tags: ["soul", "motown", "60s", "70s", "trio", "female", "retro", "dance"]
   },
   {
     id: 45,
@@ -615,7 +659,8 @@ export const artists = [
     featured: false,
     description: "The Gillettes are one of the most successful Motown tribute bands around. Specialising in the sounds of soul and Motown stars such as the Temptations, the Drifters, the Four Tops, Lou Rawls, Wilson Pickett, Jimmy Ruffin, the O'Jays, Sam Cooke, James Brown and many more. With many prestigious venues behind them, the Gillettes have both the versatility and experience to captivate every audience.",
     availability: "Available",
-    bookingCount: 287
+    bookingCount: 287,
+    tags: ["soul", "motown", "60s", "70s", "group", "male", "retro"]
   },
   {
     id: 46,
@@ -628,7 +673,8 @@ export const artists = [
     featured: false,
     description: "Let's Drift is a one-of-a-kind Drifters and Motown show with a smooth sound and an even smoother attitude. Led by the legendary lead vocalist Gillie Leroy Jones, who has had the honour of performing and touring with members of the Original Drifters including Ben E King, Billy Lewis, Peter LaMarr and Tony Jackson. All performances are 100% live - no samples, no auto-tuning, just genuine live music.",
     availability: "Available",
-    bookingCount: 198
+    bookingCount: 198,
+    tags: ["soul", "motown", "60s", "70s", "group", "male", "retro"]
   },
   {
     id: 47,
@@ -641,7 +687,8 @@ export const artists = [
     featured: false,
     description: "Multi-award-winning soul and Motown tribute show, The Manhattans deliver with style, charisma and outstanding talent! These guys really know how to entertain and play classic soul and Motown hits from the Temptations, the Stylistics, Barry White, the Drifters, the Four Tops, Edwin Starr, Boyz II Men, Billy Ocean and many more. One of the UK's finest soul and Motown vocal groups.",
     availability: "Available",
-    bookingCount: 267
+    bookingCount: 267,
+    tags: ["soul", "motown", "60s", "70s", "group", "male", "retro"]
   },
   {
     id: 48,
@@ -654,7 +701,8 @@ export const artists = [
     featured: false,
     description: "Sharing a passion for music, the Midnight Soul Sisters are a blend of amazing female soul vocalists, where every singer serves you up a different taste of Motown. Three established professional singers with years of combined experience as vocalists and dancers, who have worked with world-renowned artists including Beyoncé, Mary Wilson, Errol Brown, Edwin Starr, Martha Reeves and many more.",
     availability: "Available",
-    bookingCount: 178
+    bookingCount: 178,
+    tags: ["soul", "motown", "60s", "70s", "trio", "female", "retro", "dance"]
   },
   {
     id: 49,
@@ -667,7 +715,8 @@ export const artists = [
     featured: false,
     description: "The Motown Brothers are one of a few funky but sophisticated groups with an African twist currently in the UK. The group consists of 3 members with an average of 25 years' performing experience amongst them. Unlike most other Motown groups, they still have youth on their side which enables their choreography to be a cut above the rest. With this group you have the whole package: the looks, the moves and, most importantly, the voices.",
     availability: "Available",
-    bookingCount: 156
+    bookingCount: 156,
+    tags: ["soul", "motown", "60s", "70s", "trio", "male", "retro", "dance"]
   },
   {
     id: 50,
@@ -680,7 +729,8 @@ export const artists = [
     featured: false,
     description: "The Motown Legends are a superb, classy act that have been wowing audiences all over the UK with a unique blend of soul, Motown, RnB and classic funk. Featuring outstanding vocal harmonies, this fabulous duo's show includes hits from the Four Tops, the Temptations, Stevie Wonder, the Drifters and many more. With their energetic and exciting performance, dapper suits and coolness, your audience are guaranteed fantastic entertainment.",
     availability: "Available",
-    bookingCount: 189
+    bookingCount: 189,
+    tags: ["soul", "motown", "60s", "70s", "duo", "male", "retro"]
   },
   {
     id: 51,
@@ -693,7 +743,8 @@ export const artists = [
     featured: false,
     description: "Scotbase Diana Ross tribute shows cover the diva's material from her time with the Supremes up to her more recent hits. These shows are great for parties, corporate functions, weddings and other special events as they provide all the glamour required of a true superstar such as Miss Ross.",
     availability: "Available",
-    bookingCount: 201
+    bookingCount: 201,
+    tags: ["soul", "motown", "60s", "70s", "solo", "female", "retro", "disco"]
   }
 ];
 

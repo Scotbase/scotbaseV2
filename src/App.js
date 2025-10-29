@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Artists from './pages/Artists';
 import ArtistDetail from './pages/ArtistDetail';
+import DinnerSpeakers from './pages/DinnerSpeakers';
 import Contact from './pages/Contact';
 import './App.css';
 
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/artists" element={<Artists />} />
             <Route path="/artist/:id" element={<ArtistDetail />} />
+            <Route path="/dinner-speakers" element={<DinnerSpeakers />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>

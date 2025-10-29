@@ -24,14 +24,15 @@
   width: 100%;
   height: 280px;
   overflow: hidden;
+  background: linear-gradient(135deg, var(--image-bg-gradient-start) 0%, var(--image-bg-gradient-end) 100%);
 }
 
 .artist-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s;
-  background: linear-gradient(135deg, var(--image-bg-gradient-start) 0%, var(--image-bg-gradient-end) 100%);
+  transition: transform 0.3s, opacity 0.3s;
+  opacity: 1;
 }
 
 .artist-image-container::after {
