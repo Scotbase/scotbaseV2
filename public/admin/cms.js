@@ -1,6 +1,4 @@
-// cms.js
-// CMS is already available globally from the decap-cms-app CDN
-
+// CMS is available globally from the CDN
 CMS.registerPreviewTemplate("acts", ({ entry, getAsset }) => {
   const data = entry.getIn(["data"]).toJS();
   const image = getAsset(data.image);
