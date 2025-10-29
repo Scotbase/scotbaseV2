@@ -4,7 +4,7 @@
 }
 
 .dinner-speakers-hero {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0065BD 0%, #0091DA 100%);
   color: #ffffff;
   padding: 4rem 2rem;
   text-align: center;
@@ -46,8 +46,8 @@
 }
 
 .search-input:focus {
-  border-color: #667eea;
-  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+  border-color: #0065BD;
+  box-shadow: 0 4px 20px rgba(0, 101, 189, 0.3);
 }
 
 /* Coming Soon Section */
@@ -75,14 +75,14 @@
 }
 
 .coming-soon a {
-  color: #667eea;
+  color: #0065BD;
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s;
 }
 
 .coming-soon a:hover {
-  color: #764ba2;
+  color: #0091DA;
   text-decoration: underline;
 }
 

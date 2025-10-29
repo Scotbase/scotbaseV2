@@ -16,8 +16,8 @@
 }
 
 .search-input:focus {
-  border-color: #667eea;
-  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+  border-color: #0065BD;
+  box-shadow: 0 4px 20px rgba(0, 101, 189, 0.3);
 }
 
 .search-input::placeholder {

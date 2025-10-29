@@ -4,7 +4,7 @@
 }
 
 .artists-hero {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0065BD 0%, #0091DA 100%);
   color: #ffffff;
   padding: 4rem 2rem;
   text-align: center;
@@ -50,9 +50,9 @@
 
 .genre-button {
   padding: 0.7rem 1.5rem;
-  border: 2px solid #667eea;
+  border: 2px solid #0065BD;
   background: white;
-  color: #667eea;
+  color: #0065BD;
   border-radius: 25px;
   font-weight: 600;
   cursor: pointer;
@@ -60,13 +60,13 @@
 }
 
 .genre-button:hover {
-  background: #667eea;
+  background: #0065BD;
   color: white;
   transform: translateY(-2px);
 }
 
 .genre-button.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0065BD 0%, #0091DA 100%);
   color: white;
   border-color: transparent;
 }
@@ -106,7 +106,7 @@
 }
 
 .clear-filters-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0065BD 0%, #0091DA 100%);
   color: white;
   border: none;
   padding: 0.8rem 2rem;
@@ -115,12 +115,12 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 101, 189, 0.3);
 }
 
 .clear-filters-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 101, 189, 0.4);
 }
 
 /* Responsive Design */

@@ -11,7 +11,7 @@
   border-radius: 8px;
   margin-bottom: 1.5rem;
   background: white;
-  border: 2px dashed #667eea;
+  border: 2px dashed #0065BD;
 }
 
 .cms-banner.success {
@@ -27,7 +27,7 @@
 .cms-badge {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #667eea;
+  color: #0065BD;
 }
 
 .cms-banner.success .cms-badge {
@@ -91,7 +91,7 @@
 }
 
 .cms-act-info .tribute {
-  color: #667eea;
+  color: #0065BD;
   font-size: 1.1rem;
   font-weight: 600;
   margin: 0 0 1rem 0;
@@ -124,7 +124,7 @@
 }
 
 .cms-act-info .tag {
-  background: #667eea;
+  background: #0065BD;
   color: white;
   padding: 0.3rem 0.8rem;
   border-radius: 15px;

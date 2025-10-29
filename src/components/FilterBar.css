@@ -40,17 +40,17 @@
 }
 
 .parent-category-btn:hover {
-  border-color: #667eea;
+  border-color: #0065BD;
   background: #f8f9ff;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 101, 189, 0.2);
 }
 
 .parent-category-btn.selected {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-color: #667eea;
+  background: linear-gradient(135deg, #0065BD 0%, #0091DA 100%);
+  border-color: #0065BD;
   color: white;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 101, 189, 0.4);
 }
 
 .filter-header {
@@ -88,12 +88,12 @@
 
 .filter-header h3 .arrow {
   font-size: 0.9rem;
-  color: #667eea;
+  color: #0065BD;
   transition: transform 0.3s;
 }
 
 .clear-all-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0065BD 0%, #0091DA 100%);
   color: white;
   border: none;
   padding: 0.5rem 1rem;
@@ -106,7 +106,7 @@
 
 .clear-all-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 101, 189, 0.4);
 }
 
 /* Selected Tags Display */
@@ -124,7 +124,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0065BD 0%, #0091DA 100%);
   color: white;
   padding: 0.5rem 0.75rem;
   border-radius: 20px;
@@ -180,7 +180,7 @@
 }
 
 .filter-category:hover {
-  border-color: #667eea;
+  border-color: #0065BD;
 }
 
 .category-header {
@@ -203,7 +203,7 @@
 }
 
 .category-header.expanded {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0065BD 0%, #0091DA 100%);
   color: white;
 }
 
@@ -248,15 +248,15 @@
 }
 
 .tag-button:hover {
-  border-color: #667eea;
+  border-color: #0065BD;
   background: #f8f9ff;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .tag-button.selected {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-color: #667eea;
+  background: linear-gradient(135deg, #0065BD 0%, #0091DA 100%);
+  border-color: #0065BD;
   color: white;
   font-weight: 600;
 }
