@@ -46,7 +46,7 @@ function Contact() {
                 <span className="contact-icon">📧</span>
                 <div>
                   <h3>Email</h3>
-                  <p>info@scotbase.co.uk</p>
+                  <p>info@scotbase.com</p>
                 </div>
               </div>
 
@@ -54,15 +54,17 @@ function Contact() {
                 <span className="contact-icon">📞</span>
                 <div>
                   <h3>Phone</h3>
-                  <p>+44 (0) 141 XXX XXXX</p>
+                  <p>0141 849 0333</p>
                 </div>
               </div>
 
               <div className="contact-detail">
                 <span className="contact-icon">📍</span>
                 <div>
-                  <h3>Office</h3>
-                  <p>Glasgow, Scotland</p>
+                  <h3>Address</h3>
+                  <p>Scotbase</p>
+                  <p>103 Abercorn Street</p>
+                  <p>Paisley, PA3 4AT</p>
                 </div>
               </div>
 
@@ -79,9 +81,8 @@ function Contact() {
             <div className="social-section">
               <h3>Follow Us</h3>
               <div className="social-icons">
-                <a href="#facebook" className="social-icon">📘 Facebook</a>
+                <a href="https://www.facebook.com/scotbaseentertainments" target="_blank" rel="noopener noreferrer" className="social-icon">📘 Facebook</a>
                 <a href="#instagram" className="social-icon">📷 Instagram</a>
-                <a href="#twitter" className="social-icon">🐦 Twitter</a>
               </div>
             </div>
           </div>

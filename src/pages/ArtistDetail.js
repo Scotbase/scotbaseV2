@@ -11,9 +11,9 @@ function ArtistDetail() {
   if (!artist) {
     return (
       <div className="artist-not-found">
-        <h2>Artist Not Found</h2>
-        <p>Sorry, we couldn't find the artist you're looking for.</p>
-        <Link to="/artists" className="btn btn-primary">Back to Artists</Link>
+        <h2>Act Not Found</h2>
+        <p>Sorry, we couldn't find the act you're looking for.</p>
+        <Link to="/artists" className="btn btn-primary">Back to Tribute Acts</Link>
       </div>
     );
   }
@@ -54,13 +54,6 @@ function ArtistDetail() {
               </div>
             </div>
             <div className="meta-item">
-              <span className="meta-icon">💰</span>
-              <div>
-                <strong>Price Range</strong>
-                <p>{artist.price}</p>
-              </div>
-            </div>
-            <div className="meta-item">
               <span className="meta-icon">✅</span>
               <div>
                 <strong>Availability</strong>
@@ -69,21 +62,14 @@ function ArtistDetail() {
             </div>
           </div>
 
-          <div className="booking-stats">
-            <div className="stat">
-              <div className="stat-number">{artist.bookingCount}</div>
-              <div className="stat-label">Successful Bookings</div>
-            </div>
-          </div>
-
           <p className="artist-detail-description">{artist.description}</p>
 
           <div className="action-buttons">
             <Link to="/contact" className="btn btn-primary">
-              Book This Artist
+              Book This Act
             </Link>
             <Link to="/artists" className="btn btn-secondary">
-              Back to All Artists
+              Back to All Acts
             </Link>
           </div>
         </div>
@@ -91,7 +77,7 @@ function ArtistDetail() {
 
       {relatedArtists.length > 0 && (
         <section className="related-artists-section">
-          <h3>Similar Artists</h3>
+          <h3>Similar Acts</h3>
           <div className="related-artists-grid">
             {relatedArtists.map(relatedArtist => (
               <Link 
@@ -99,11 +85,13 @@ function ArtistDetail() {
                 to={`/artist/${relatedArtist.id}`}
                 className="related-artist-card"
               >
-                <img 
-                  src={relatedArtist.image} 
-                  alt={relatedArtist.name}
-                  onError={(e) => handleImageError(e, relatedArtist)}
-                />
+                <div>
+                  <img 
+                    src={relatedArtist.image} 
+                    alt={relatedArtist.name}
+                    onError={(e) => handleImageError(e, relatedArtist)}
+                  />
+                </div>
                 <div className="related-artist-info">
                   <h4>{relatedArtist.name}</h4>
                   <p>{relatedArtist.tribute}</p>

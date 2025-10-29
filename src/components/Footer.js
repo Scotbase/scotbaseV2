@@ -20,16 +20,16 @@ function Footer() {
         </div>
         <div className="footer-section">
           <h4>Contact</h4>
-          <p>📧 info@scotbase.co.uk</p>
-          <p>📞 +44 (0) 141 XXX XXXX</p>
-          <p>📍 Glasgow, Scotland</p>
+          <p>📧 info@scotbase.com</p>
+          <p>📞 0141 849 0333</p>
+          <p>📍 103 Abercorn Street</p>
+          <p style={{ marginLeft: '1.5rem' }}>Paisley, PA3 4AT</p>
         </div>
         <div className="footer-section">
           <h4>Follow Us</h4>
           <div className="social-links">
-            <a href="#facebook">Facebook</a>
+            <a href="https://www.facebook.com/scotbaseentertainments" target="_blank" rel="noopener noreferrer">Facebook</a>
             <a href="#instagram">Instagram</a>
-            <a href="#twitter">Twitter</a>
           </div>
         </div>
       </div>

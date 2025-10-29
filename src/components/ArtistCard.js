@@ -26,10 +26,6 @@ function ArtistCard({ artist }) {
             <span className="artist-genre">🎵 {artist.genre}</span>
             <span className="artist-location">📍 {artist.location}</span>
           </div>
-          <div className="artist-price">{artist.price}</div>
-          <div className="artist-bookings">
-            {artist.bookingCount} bookings
-          </div>
         </div>
       </div>
     </Link>
