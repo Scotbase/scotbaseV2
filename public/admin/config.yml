@@ -3,8 +3,10 @@
 # =========================
 
 backend:
-  name: git-gateway       # works with Netlify Identity
-  branch: main            # your main Git branch
+  name: auth0  # works with Auth0
+  branch: main # your main Git branch
+  auth0_domain: "scotbase.uk.auth0.com"
+  auth0_client_id: "U2VngChFTJ54rddMdk5XrgQfgREAZR4i"
 
 media_folder: "public/uploads"   # where uploaded images are stored
 public_folder: "/uploads"        # how images are referenced in site
