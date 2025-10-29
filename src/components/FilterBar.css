@@ -62,10 +62,34 @@
   border-bottom: 2px solid #f0f0f0;
 }
 
+.filter-header-toggle {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.3s;
+  padding: 0.75rem;
+  border-radius: 8px;
+}
+
+.filter-header-toggle:hover {
+  background: #f8f9ff;
+}
+
 .filter-header h3 {
   margin: 0;
   color: #333;
   font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.filter-header h3 .arrow {
+  font-size: 0.9rem;
+  color: #667eea;
+  transition: transform 0.3s;
 }
 
 .clear-all-btn {
@@ -257,6 +281,10 @@
   .parent-category-filter h3,
   .filter-header h3 {
     font-size: 1.1rem;
+  }
+
+  .filter-header-toggle {
+    padding: 0.5rem;
   }
 
   .parent-category-btn {
