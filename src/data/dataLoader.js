@@ -61,7 +61,7 @@ export const getAllArtists = async () => {
  */
 export const getArtistById = async (id) => {
   const allArtists = await getAllArtists();
-  return allArtists.find(artist => artist.id == id || artist.id === id);
+  return allArtists.find(artist => String(artist.id) === String(id));
 };
 
 /**

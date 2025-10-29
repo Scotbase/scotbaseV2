@@ -11,7 +11,7 @@ function Home() {
   const [randomFeatured, setRandomFeatured] = useState(null);
   const [popularArtists, setPopularArtists] = useState([]);
   // const [cmsActsCount, setCmsActsCount] = useState(0); // Commented out - CMS demo removed
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true); // Removed - not used after commenting out CMS demo
 
   useEffect(() => {
     const loadData = async () => {
@@ -31,9 +31,8 @@ function Home() {
         // setCmsActsCount(cmsActs.length); // Commented out - CMS demo removed
       } catch (error) {
         console.error('Error loading home page data:', error);
-      } finally {
-        setLoading(false);
       }
+      // finally { setLoading(false); } // Removed - loading state not used
     };
 
     loadData();
