@@ -3,7 +3,7 @@
 
 // Using WordPress data from scotbase.net
 // import { artists as hardcodedArtists } from './artists';
-import { fetchActsFromCMS } from '../utils/cmsHelper';
+// import { fetchActsFromCMS } from '../utils/cmsHelper'; // Disabled for now
 import { fetchActsFromWordPress } from '../utils/wordpressHelper';
 
 let cachedActs = null;

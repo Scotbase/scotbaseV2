@@ -12,20 +12,16 @@ function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParen
   const [categorySearch, setCategorySearch] = useState('');
   const [genres, setGenres] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   // Fetch taxonomies on mount
   useEffect(() => {
     const loadTaxonomies = async () => {
-      setLoading(true);
       try {
         const { genres: fetchedGenres, categories: fetchedCategories } = await fetchTaxonomies();
         setGenres(fetchedGenres);
         setCategories(fetchedCategories);
       } catch (error) {
         console.error('Error loading taxonomies:', error);
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -88,10 +84,6 @@ function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParen
       ? selectedTags.filter(t => t !== tag)
       : [...selectedTags, tag];
     onTagsChange(newTags);
-  };
-
-  const handleClearAll = () => {
-    onTagsChange([]);
   };
 
   const toggleCategory = (category) => {
