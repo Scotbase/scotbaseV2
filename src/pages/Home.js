@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import FeaturedArtist from '../components/FeaturedArtist';
 import ArtistCard from '../components/ArtistCard';
+import Testimonials from '../components/Testimonials';
+import StatsCounter from '../components/StatsCounter';
 // import CMSTestAct from '../components/CMSTestAct'; // Commented out - demo section removed
 import { getFeaturedArtists, getPopularArtists } from '../data/dataLoader';
 // import { getCMSActs } from '../data/dataLoader'; // Commented out - CMS demo removed
@@ -10,16 +12,24 @@ import './Home.css';
 function Home() {
   const [randomFeatured, setRandomFeatured] = useState(null);
   const [popularArtists, setPopularArtists] = useState([]);
+  const [currentSlide, setCurrentSlide] = useState(0);
   // const [cmsActsCount, setCmsActsCount] = useState(0); // Commented out - CMS demo removed
   // const [loading, setLoading] = useState(true); // Removed - not used after commenting out CMS demo
+
+  // Hero background images
+  const heroImages = [
+    '/images/abba-a-rival-quartet.png',
+    '/images/forever-abba.png',
+    '/images/super-troopers.png',
+    '/images/gimme-abba.png'
+  ];
 
   useEffect(() => {
     const loadData = async () => {
       try {
-        // Get featured and popular artists
+        // Get featured and popular artists (now includes WordPress data)
         const featured = await getFeaturedArtists();
         const popular = await getPopularArtists(6);
-        // const cmsActs = await getCMSActs(); // Commented out - CMS demo removed
         
         // Pick a random featured artist
         if (featured.length > 0) {
@@ -28,28 +38,44 @@ function Home() {
         }
         
         setPopularArtists(popular);
-        // setCmsActsCount(cmsActs.length); // Commented out - CMS demo removed
       } catch (error) {
-        console.error('Error loading home page data:', error);
+        console.error('❌ Error loading home page data:', error);
       }
-      // finally { setLoading(false); } // Removed - loading state not used
     };
 
     loadData();
   }, []);
 
+  // Hero slideshow effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [heroImages.length]);
+
   return (
     <div className="home-page">
       {/* Hero Section */}
       <section className="hero">
+        <div className="hero-background">
+          {heroImages.map((image, index) => (
+            <div
+              key={index}
+              className={`hero-slide ${index === currentSlide ? 'active' : ''}`}
+              style={{ backgroundImage: `url(${image})` }}
+            />
+          ))}
+        </div>
         <div className="hero-content">
-          <h1 className="hero-title">Scotland's Premier Tribute Act Booking Agency</h1>
+          <h1 className="hero-title">Scotland's Premier Performance Act Booking Agency</h1>
           <p className="hero-subtitle">
-            Book the best tribute acts and entertainment for your events
+            Book the best performance acts and entertainment for your events
           </p>
           <div className="hero-buttons">
             <Link to="/artists" className="btn btn-primary">
-              Browse Tribute Acts
+              Browse Performance Acts
             </Link>
             <Link to="/contact" className="btn btn-secondary">
               Get in Touch
@@ -57,6 +83,9 @@ function Home() {
           </div>
         </div>
       </section>
+
+      {/* Stats Counter Section */}
+      <StatsCounter />
 
       {/* CMS Test Section - Commented out for production */}
       {/* 
@@ -84,7 +113,7 @@ function Home() {
           </div>
           <div className="view-all-container">
             <Link to="/artists" className="btn btn-primary">
-              View All Tribute Acts
+              View All Performance Acts
             </Link>
           </div>
         </div>
@@ -116,6 +145,9 @@ function Home() {
           </div>
         </div>
       </section>
+
+      {/* Testimonials Section */}
+      <Testimonials />
     </div>
   );
 }

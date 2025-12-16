@@ -12,7 +12,9 @@ export const artists = [
     description: "Freddie Mercury tribute band Freddie & Queen Experience has all of Freddie's trademark moves, vocals and showmanship. This act never fails to entertain - a definite crowd pleaser! The Freddie & Queen Experience tribute band is made up of some of the best musicians in the UK, including arguably one of the best professional Brian May tributes, Andy Wills. With amazing vocals and harmonies, fabulous replica costumes, and energetic dancing, this is one of the best Queen tribute acts in the UK today.",
     availability: "Available",
     bookingCount: 287,
-    tags: ["rock", "70s", "80s", "group", "male", "classic-rock", "high-energy"]
+    tags: ["rock", "70s", "80s", "group", "male", "classic-rock", "high-energy"],
+    rating: 5,
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"  // Sample video for testing
   },
   {
     id: 2,
@@ -26,7 +28,9 @@ export const artists = [
     description: "The Mercury & May tribute show is made up of some of the best musicians in the UK, including Ian Adams as Freddie and arguably one of the best professional Brian May tributes, Andy Wills. Hailed as the UK's premier tribute to the world's greatest showman! It consists of a full night of Queen and Freddie's greatest hits. With full replica costumes and reproducing Queen and Freddie's live shows, you are guaranteed a great night's entertainment.",
     availability: "Available",
     bookingCount: 203,
-    tags: ["rock", "70s", "80s", "duo", "male", "classic-rock", "high-energy"]
+    tags: ["rock", "70s", "80s", "duo", "male", "classic-rock", "high-energy"],
+    rating: 4,
+    videoUrl: "https://www.youtube.com/watch?v=kJQP7kiw5Fk"  // Sample video for testing
   },
   {
     id: 3,
@@ -100,7 +104,9 @@ export const artists = [
     description: "The full ABBA experience with all four members! Mamma Mia! Our outstanding ABBA tribute quartet delivers an authentic recreation of the Swedish legends with fabulous costumes, harmonies and all the classic hits. Perfect for weddings, corporate events and themed parties.",
     availability: "Available",
     bookingCount: 234,
-    tags: ["pop", "70s", "80s", "quartet", "mixed", "disco", "dance"]
+    tags: ["pop", "70s", "80s", "quartet", "mixed", "disco", "dance"],
+    rating: 5,
+    videoUrl: "https://www.youtube.com/watch?v=xFrGuyw1V8s"  // Sample ABBA video for testing
   },
   {
     id: 8,
@@ -114,7 +120,8 @@ export const artists = [
     description: "Forever Abba brings all the magic of the Swedish superstars to life with spectacular costumes, perfect harmonies and an unforgettable show that will have everyone singing along to Dancing Queen, Waterloo and all the ABBA classics.",
     availability: "Available",
     bookingCount: 189,
-    tags: ["pop", "70s", "80s", "quartet", "mixed", "disco", "dance"]
+    tags: ["pop", "70s", "80s", "quartet", "mixed", "disco", "dance"],
+    rating: 4  // Example: card with rating but no video
   },
   {
     id: 9,

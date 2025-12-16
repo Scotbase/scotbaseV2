@@ -8,6 +8,11 @@
   flex: 1;
 }
 
+/* Ensure content on home page starts below navbar */
+.main-content > .home-page {
+  margin-top: 0;
+}
+
 /* Button Styles */
 .btn {
   padding: 1rem 2rem;

@@ -1,9 +1,10 @@
 // src/data/dataLoader.js
-// Unified data loader that fetches from CMS
+// Unified data loader that fetches from WordPress and CMS
 
-// Hardcoded data commented out - now using CMS only
+// Using WordPress data from scotbase.net
 // import { artists as hardcodedArtists } from './artists';
 import { fetchActsFromCMS } from '../utils/cmsHelper';
+import { fetchActsFromWordPress } from '../utils/wordpressHelper';
 
 let cachedActs = null;
 let lastFetchTime = null;
@@ -20,40 +21,24 @@ export const getAllArtists = async () => {
   }
 
   try {
-    // Fetch all acts from CMS
-    const cmsActs = await fetchActsFromCMS();
+    // Fetch from WordPress only (CMS is disabled for now)
+    const wpActs = await fetchActsFromWordPress();
     
-    if (cmsActs && cmsActs.length > 0) {
-      // Use CMS data only
-      const cmsActsWithIds = cmsActs.map((act, index) => ({
-        ...act,
-        id: act.id || index + 1,
-        fromCMS: true // Flag to identify CMS acts
-      }));
-      
-      cachedActs = cmsActsWithIds;
+    if (wpActs && wpActs.length > 0) {
+      cachedActs = wpActs;
       lastFetchTime = Date.now();
-      
-      console.log(`✅ Loaded ${cmsActsWithIds.length} acts from CMS`);
+      console.log(`🎉 Loaded ${wpActs.length} acts from WordPress (scotbase.net)`);
       return cachedActs;
     }
   } catch (error) {
-    console.warn('⚠️ Failed to load acts from CMS:', error);
+    console.warn('⚠️ Failed to load acts from WordPress:', error);
   }
 
   // No data available
   cachedActs = [];
   lastFetchTime = Date.now();
-  console.log(`⚠️ No acts loaded - CMS data unavailable`);
+  console.log(`⚠️ No acts loaded - WordPress unavailable`);
   return cachedActs;
-  
-  /* HARDCODED DATA FALLBACK - Commented out, uncomment to restore
-  // Fallback to hardcoded data only
-  cachedActs = hardcodedArtists;
-  lastFetchTime = Date.now();
-  console.log(`📦 Using ${hardcodedArtists.length} hardcoded acts only`);
-  return cachedActs;
-  */
 };
 
 /**

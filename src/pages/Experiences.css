@@ -1,0 +1,136 @@
+.experiences-page {
+  min-height: 100vh;
+  background-color: #f9f9f9;
+}
+
+.experiences-hero {
+  background: linear-gradient(135deg, #0065BD 0%, #0091DA 100%);
+  color: #ffffff;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.experiences-hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.experiences-hero p {
+  font-size: 1.3rem;
+  opacity: 0.95;
+}
+
+.experiences-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Search Bar */
+.search-bar-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 50px;
+  outline: none;
+  transition: all 0.3s;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-input:focus {
+  border-color: #0065BD;
+  box-shadow: 0 4px 20px rgba(0, 101, 189, 0.3);
+}
+
+/* Coming Soon Section */
+.coming-soon {
+  text-align: center;
+  padding: 6rem 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  max-width: 800px;
+}
+
+.coming-soon h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.coming-soon p {
+  font-size: 1.2rem;
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.coming-soon a {
+  color: #0065BD;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.coming-soon a:hover {
+  color: #0091DA;
+  text-decoration: underline;
+}
+
+/* Experiences Grid */
+.experiences-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* No Results */
+.no-results {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.no-results h3 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.no-results p {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .experiences-hero h1 {
+    font-size: 2rem;
+  }
+
+  .experiences-hero p {
+    font-size: 1.1rem;
+  }
+
+  .coming-soon h2 {
+    font-size: 2rem;
+  }
+
+  .coming-soon p {
+    font-size: 1rem;
+  }
+
+  .experiences-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

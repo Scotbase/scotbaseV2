@@ -1,6 +1,28 @@
 .featured-artist-section {
   padding: 4rem 2rem;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-artist-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(0, 101, 189, 0.1) 0%, transparent 70%);
+  animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-20px, 20px);
+  }
 }
 
 .featured-title {
@@ -8,6 +30,31 @@
   font-size: 2.5rem;
   color: #333;
   margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .featured-artist {
@@ -20,6 +67,15 @@
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 1;
+  animation: fadeInUp 1s ease-out;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.featured-artist:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
 }
 
 .featured-image-container {
@@ -34,8 +90,12 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: opacity 0.3s;
+  transition: transform 0.5s ease, opacity 0.3s;
   opacity: 1;
+}
+
+.featured-artist:hover .featured-image {
+  transform: scale(1.05);
 }
 
 .featured-image-container::after {
@@ -95,6 +155,93 @@
   font-size: 1.3rem;
 }
 
+/* Video Indicator for Featured Artist */
+.featured-video-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.7);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.featured-play-icon {
+  width: 36px;
+  height: 36px;
+  margin-left: 4px;
+}
+
+.featured-video-indicator:hover {
+  background: rgba(0, 101, 189, 0.9);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Star Rating for Featured Artist */
+.featured-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-bottom: 1.5rem;
+}
+
+.featured-rating .star {
+  font-size: 1.2rem;
+  opacity: 0.3;
+}
+
+.featured-rating .star.filled {
+  opacity: 1;
+}
+
+.featured-rating-text {
+  font-size: 1rem;
+  color: #666;
+  margin-left: 0.5rem;
+  font-weight: 600;
+}
+
+/* Action Buttons */
+.featured-action-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.featured-action-buttons .btn {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-video {
+  background: #e74c3c;
+  color: white;
+  border: none;
+}
+
+.btn-video:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
+}
+
 /* Responsive Design */
 @media (max-width: 968px) {
   .featured-artist {
@@ -115,6 +262,24 @@
 
   .featured-title {
     font-size: 2rem;
+  }
+
+  .featured-video-indicator {
+    width: 60px;
+    height: 60px;
+  }
+
+  .featured-play-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .featured-action-buttons {
+    flex-direction: column;
+  }
+
+  .featured-action-buttons .btn {
+    width: 100%;
   }
 }
 

@@ -8,7 +8,7 @@ function Footer() {
       <div className="footer-container">
         <div className="footer-section">
           <h3>Scotbase Entertainment</h3>
-          <p>Scotland's premier tribute act booking agency</p>
+          <p>Scotland's premier performance act booking agency</p>
         </div>
         <div className="footer-section">
           <h4>Quick Links</h4>
@@ -28,8 +28,9 @@ function Footer() {
         <div className="footer-section">
           <h4>Follow Us</h4>
           <div className="social-links">
-            <a href="https://www.facebook.com/scotbaseentertainments" target="_blank" rel="noopener noreferrer">Facebook</a>
-            <a href="#instagram">Instagram</a>
+            <a href="https://www.facebook.com/scotbaseentertainments" target="_blank" rel="noopener noreferrer">📘 Facebook</a>
+            <a href="https://www.youtube.com/@Scotbase" target="_blank" rel="noopener noreferrer">📺 YouTube</a>
+            <a href="https://www.instagram.com/scotbase_entertainment" target="_blank" rel="noopener noreferrer">📷 Instagram</a>
           </div>
         </div>
       </div>

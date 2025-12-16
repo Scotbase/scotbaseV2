@@ -9,6 +9,7 @@ function Artists() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTags, setSelectedTags] = useState([]);
   const [selectedParentCategory, setSelectedParentCategory] = useState(null);
+  const [selectedGenre, setSelectedGenre] = useState(null);
   const [artists, setArtists] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -28,18 +29,26 @@ function Artists() {
     loadArtists();
   }, []);
 
-  // Filter artists based on parent category, search, and tags
+  // Filter artists based on genre, parent category, search, and tags
   const filteredArtists = artists.filter(artist => {
+    // Genre filter (matches against artist.genre or artist.act_genre slug)
+    const matchesGenre = !selectedGenre || 
+      artist.genre?.toLowerCase() === selectedGenre.toLowerCase() ||
+      artist.act_genre?.some(g => g === selectedGenre) ||
+      (Array.isArray(artist.act_genre) && artist.act_genre.includes(selectedGenre));
+    
     // Parent category filter
     const matchesParentCategory = !selectedParentCategory || 
-      artist.parentCategory === selectedParentCategory;
+      artist.parentCategory === selectedParentCategory ||
+      artist.act_category?.some(c => c === selectedParentCategory) ||
+      (Array.isArray(artist.act_category) && artist.act_category.includes(selectedParentCategory));
     
     // Search filter
     const matchesSearch = 
       artist.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      artist.tribute.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      artist.genre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      artist.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      artist.tribute?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      artist.genre?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      artist.location?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       (artist.tags && artist.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())));
     
     // Tag filter - artist must have ALL selected tags
@@ -48,14 +57,14 @@ function Artists() {
         artist.tags && artist.tags.includes(selectedTag)
       );
     
-    return matchesParentCategory && matchesSearch && matchesTags;
+    return matchesGenre && matchesParentCategory && matchesSearch && matchesTags;
   });
 
   if (loading) {
     return (
       <div className="artists-page">
         <section className="artists-hero">
-          <h1>Browse Our Tribute Acts</h1>
+          <h1>Browse Our Performance Acts</h1>
           <p>Loading acts from CMS...</p>
         </section>
         <div className="artists-container">
@@ -70,17 +79,19 @@ function Artists() {
   return (
     <div className="artists-page">
       <section className="artists-hero">
-        <h1>Browse Our Tribute Acts</h1>
-        <p>Find the perfect tribute act for your event</p>
+        <h1>Browse Our Performance Acts</h1>
+        <p>Find the perfect performance act for your event</p>
       </section>
 
       <div className="artists-container">
         <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
         
-        {/* Category and Tag Filters */}
+        {/* Genre, Category and Tag Filters */}
         <FilterBar 
           selectedTags={selectedTags}
           onTagsChange={setSelectedTags}
+          selectedGenre={selectedGenre}
+          onGenreChange={setSelectedGenre}
           selectedParentCategory={selectedParentCategory}
           onParentCategoryChange={setSelectedParentCategory}
           artists={artists}
@@ -92,7 +103,7 @@ function Artists() {
             Showing {filteredArtists.length} {
               selectedParentCategory 
                 ? (filteredArtists.length === 1 ? selectedParentCategory.replace(/s$/, '') : selectedParentCategory)
-                : `tribute act${filteredArtists.length !== 1 ? 's' : ''}`
+                : `performance act${filteredArtists.length !== 1 ? 's' : ''}`
             }
             {selectedTags.length > 0 && ` with ${selectedTags.length} tag${selectedTags.length !== 1 ? 's' : ''}`}
           </p>
@@ -107,14 +118,15 @@ function Artists() {
           </div>
         ) : (
           <div className="no-results">
-            <h3>No tribute acts found</h3>
+            <h3>No performance acts found</h3>
             <p>Try adjusting your search or filter criteria</p>
-            {(selectedTags.length > 0 || selectedParentCategory) && (
+            {(selectedTags.length > 0 || selectedParentCategory || selectedGenre) && (
               <button 
                 className="clear-filters-btn"
                 onClick={() => {
                   setSelectedTags([]);
                   setSelectedParentCategory(null);
+                  setSelectedGenre(null);
                 }}
               >
                 Clear All Filters

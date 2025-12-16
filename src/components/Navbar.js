@@ -17,12 +17,17 @@ function Navbar() {
           </li>
           <li className="nav-item">
             <Link to="/artists" className="nav-link">
-              Tribute Acts
+              Performance Acts
             </Link>
           </li>
           <li className="nav-item">
             <Link to="/dinner-speakers" className="nav-link">
               Dinner Speakers
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/experiences" className="nav-link">
+              Themed Nights
             </Link>
           </li>
           <li className="nav-item">

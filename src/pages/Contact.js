@@ -82,7 +82,8 @@ function Contact() {
               <h3>Follow Us</h3>
               <div className="social-icons">
                 <a href="https://www.facebook.com/scotbaseentertainments" target="_blank" rel="noopener noreferrer" className="social-icon">📘 Facebook</a>
-                <a href="#instagram" className="social-icon">📷 Instagram</a>
+                <a href="https://www.youtube.com/@Scotbase" target="_blank" rel="noopener noreferrer" className="social-icon">📺 YouTube</a>
+                <a href="https://www.instagram.com/scotbase_entertainment" target="_blank" rel="noopener noreferrer" className="social-icon">📷 Instagram</a>
               </div>
             </div>
           </div>
