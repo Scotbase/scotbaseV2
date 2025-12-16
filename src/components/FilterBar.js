@@ -21,7 +21,7 @@ function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParen
         setGenres(fetchedGenres);
         setCategories(fetchedCategories);
       } catch (error) {
-        console.error('Error loading taxonomies:', error);
+        console.error('Error loading taxonomies from WordPress:', error);
       }
     };
 
