@@ -101,19 +101,44 @@ export const parseWordPressAct = async (wpAct) => {
     const validCategories = categories.filter(c => c !== null);
     const validGenres = genres.filter(g => g !== null);
 
-    // Extract image - prioritize ACF icon_image, then detail_image, then featured_media
+    // Extract image - prioritize ACF fields, then featured_media
+    // Use large size for cards - good quality without blur
     let imageUrl = '/images/placeholder.svg';
     
-    // Check ACF fields first (icon_image can be an object, URL string, or numeric ID)
-    if (wpAct.acf?.icon_image?.url) {
-      // ACF image object with URL
+    // Check ACF fields (can be an object with url, URL string, or numeric ID)
+    // Priority: act_image > icon_image > detail_image > main_image > image > featured_media
+    if (wpAct.acf?.act_image?.sizes?.large) {
+      // Use large size (1024px) - high quality for cards
+      imageUrl = wpAct.acf.act_image.sizes.large;
+    } else if (wpAct.acf?.act_image?.sizes?.medium_large) {
+      // Fall back to medium_large (768px)
+      imageUrl = wpAct.acf.act_image.sizes.medium_large;
+    } else if (wpAct.acf?.act_image?.sizes?.medium_large) {
+      // Fall back to medium_large (768px)
+      imageUrl = wpAct.acf.act_image.sizes.medium_large;
+    } else if (wpAct.acf?.act_image?.url) {
+      // Fall back to full size
+      imageUrl = wpAct.acf.act_image.url;
+    } else if (typeof wpAct.acf?.act_image === 'number') {
+      // ACF act_image is a numeric ID
+      const fetchedUrl = await fetchMediaUrl(wpAct.acf.act_image);
+      if (fetchedUrl) imageUrl = fetchedUrl;
+    } else if (typeof wpAct.acf?.act_image === 'string' && wpAct.acf.act_image.startsWith('http')) {
+      // ACF act_image is a direct URL string
+      imageUrl = wpAct.acf.act_image;
+    } else if (wpAct.acf?.icon_image?.sizes?.large) {
+      imageUrl = wpAct.acf.icon_image.sizes.large;
+    } else if (wpAct.acf?.icon_image?.sizes?.medium_large) {
+      imageUrl = wpAct.acf.icon_image.sizes.medium_large;
+    } else if (wpAct.acf?.icon_image?.url) {
+      // ACF icon_image object with URL
       imageUrl = wpAct.acf.icon_image.url;
     } else if (typeof wpAct.acf?.icon_image === 'number') {
-      // ACF image is a numeric ID - fetch the URL
+      // ACF icon_image is a numeric ID
       const fetchedUrl = await fetchMediaUrl(wpAct.acf.icon_image);
       if (fetchedUrl) imageUrl = fetchedUrl;
     } else if (typeof wpAct.acf?.icon_image === 'string' && wpAct.acf.icon_image.startsWith('http')) {
-      // ACF image is a direct URL string
+      // ACF icon_image is a direct URL string
       imageUrl = wpAct.acf.icon_image;
     } else if (wpAct.acf?.detail_image?.url) {
       // Try detail_image as object
@@ -131,12 +156,27 @@ export const parseWordPressAct = async (wpAct) => {
       imageUrl = wpAct._embedded['wp:featuredmedia'][0].source_url;
     }
 
+    // Extract detail image for artist detail page - use full size for best quality
+    let detailImageUrl = imageUrl; // Default to same as card image
+    if (wpAct.acf?.act_image?.url) {
+      // Use full size URL for detail pages
+      detailImageUrl = wpAct.acf.act_image.url;
+    } else if (wpAct.acf?.act_image?.sizes?.['2048x2048']) {
+      // Or use largest available size
+      detailImageUrl = wpAct.acf.act_image.sizes['2048x2048'];
+    } else if (wpAct.acf?.act_image?.sizes?.['1536x1536']) {
+      detailImageUrl = wpAct.acf.act_image.sizes['1536x1536'];
+    } else if (wpAct.acf?.detail_image?.url) {
+      detailImageUrl = wpAct.acf.detail_image.url;
+    }
+
     // Map to our app's format
     return {
       id: `wp-${wpAct.id}`, // Prefix with 'wp-' to avoid conflicts
       name: wpAct.title?.rendered || 'Untitled Act',
       tribute: wpAct.acf?.tribute_to || wpAct.title?.rendered || '',
       image: imageUrl,
+      detailImage: detailImageUrl,
       parentCategory: validCategories[0]?.slug || null,
       act_category: validCategories.map(c => c.slug),
       genre: validGenres[0]?.name || 'Pop',

@@ -128,6 +128,32 @@ function ArtistDetail() {
                 </span>
               </div>
 
+              {/* Key Highlights - Compact */}
+              <div className="hero-highlights">
+                <ul className="highlights-list">
+                  <li>✓ Professional performance & equipment</li>
+                  <li>✓ Suitable for all event types</li>
+                </ul>
+              </div>
+
+              {/* Quick Stats */}
+              {(artist.bookingCount || artist.rating) && (
+                <div className="hero-stats">
+                  {artist.bookingCount && (
+                    <div className="stat-box">
+                      <div className="stat-number">{artist.bookingCount}+</div>
+                      <div className="stat-label">Events</div>
+                    </div>
+                  )}
+                  {artist.rating && (
+                    <div className="stat-box">
+                      <div className="stat-number">{artist.rating}.0</div>
+                      <div className="stat-label">Rating</div>
+                    </div>
+                  )}
+                </div>
+              )}
+
               {artist.price && (
                 <div className="price-banner">
                   <span className="price-label">Booking Fee:</span>
