@@ -169,6 +169,53 @@ function Home() {
 
       {/* Testimonials Section */}
       <Testimonials />
+
+      {/* Map Section */}
+      <section className="map-section">
+        <div className="map-container">
+          <div className="map-content">
+            <div className="map-info">
+              <h2>Find Us</h2>
+              <p className="map-description">Based in Paisley, serving clients across Scotland</p>
+              <div className="contact-details">
+                <div className="contact-item">
+                  <span className="contact-icon">📍</span>
+                  <div>
+                    <strong>Address</strong>
+                    <p>103 Abercorn Street<br />Paisley, PA3 4AT</p>
+                  </div>
+                </div>
+                <div className="contact-item">
+                  <span className="contact-icon">📞</span>
+                  <div>
+                    <strong>Phone</strong>
+                    <p><a href="tel:01418490333">0141 849 0333</a></p>
+                  </div>
+                </div>
+                <div className="contact-item">
+                  <span className="contact-icon">✉️</span>
+                  <div>
+                    <strong>Email</strong>
+                    <p><a href="mailto:info@scotbase.net">info@scotbase.net</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="map-embed">
+              <iframe
+                title="Scotbase Entertainment Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2241.234567890123!2d-4.423456789012345!3d55.84567890123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x488846e234567890%3A0x1234567890abcdef!2s103%20Abercorn%20St%2C%20Paisley%20PA3%204AT!5e0!3m2!1sen!2suk!4v1234567890123!5m2!1sen!2suk"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

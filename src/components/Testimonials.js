@@ -5,35 +5,29 @@ function Testimonials() {
   const testimonials = [
     {
       id: 1,
-      name: "Sarah & John Mitchell",
-      event: "Wedding - Edinburgh",
+      name: "Gayle Campbell",
       rating: 5,
-      text: "Absolutely fantastic! ABBA - A Rival Quartet had everyone on the dance floor all night. Professional from start to finish. Scotbase made our wedding reception unforgettable!",
-      date: "September 2024"
+      text: "My wedding singer pulled out at last minute but Robert and Joan got me another singer within a matter of a few hours. Very helpful and professional people.",
     },
     {
       id: 2,
-      name: "David Thompson",
-      event: "Corporate Event - Glasgow",
+      name: "Denise Ashwood",
       rating: 5,
-      text: "We hired Forever ABBA for our company's annual gala and they exceeded all expectations. The booking process was seamless and the performance was world-class. Highly recommended!",
-      date: "August 2024"
+      text: "These guys work hard. Promised to keep me supplied with bookings and have lived up to that promise. Dee is TWILITE",
     },
     {
       id: 3,
-      name: "Emma Robertson",
-      event: "50th Birthday Party - Stirling",
+      name: "Elizabeth Marshall",
       rating: 5,
-      text: "Amazing experience from start to finish! The team at Scotbase helped us find the perfect tribute act for my husband's milestone birthday. Our guests are still talking about it!",
-      date: "July 2024"
+      text: "First class acts run by experienced team",
+      date: "June 2019"
     },
     {
       id: 4,
-      name: "Michael Fraser",
-      event: "Festival - Aberdeen",
+      name: "Robert Fraser",
       rating: 5,
-      text: "We've worked with Scotbase for multiple events now. Their professionalism, reliability, and quality of acts are unmatched. They're our go-to agency for all entertainment bookings.",
-      date: "June 2024"
+      text: "The acts are of the highest quality.",
+      date: "October 2018"
     }
   ];
 
