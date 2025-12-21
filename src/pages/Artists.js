@@ -18,7 +18,15 @@ function Artists() {
     const loadArtists = async () => {
       try {
         const allArtists = await getAllArtists();
-        setArtists(allArtists);
+        // Filter out acts that are categorized as dinner speakers or themed nights
+        const performanceActs = allArtists.filter(act => {
+          const isDinnerSpeaker = act.act_category?.includes('dinner-speakers') || 
+            act.categories?.some(cat => cat.toLowerCase().includes('dinner speaker'));
+          const isThemedNight = act.act_category?.includes('themed-nights') || 
+            act.categories?.some(cat => cat.toLowerCase().includes('themed night'));
+          return !isDinnerSpeaker && !isThemedNight;
+        });
+        setArtists(performanceActs);
       } catch (error) {
         console.error('Error loading artists:', error);
       } finally {

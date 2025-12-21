@@ -122,7 +122,6 @@ function ArtistDetail() {
 
               <div className="hero-quick-info">
                 <span className="quick-info-item">🎵 {artist.genre}</span>
-                <span className="quick-info-item">📍 {artist.location}</span>
                 <span className={`quick-info-item availability-${artist.availability.toLowerCase()}`}>
                   ✅ {artist.availability}
                 </span>
@@ -151,13 +150,6 @@ function ArtistDetail() {
                       <div className="stat-label">Rating</div>
                     </div>
                   )}
-                </div>
-              )}
-
-              {artist.price && (
-                <div className="price-banner">
-                  <span className="price-label">Booking Fee:</span>
-                  <span className="price-amount">{artist.price}</span>
                 </div>
               )}
 

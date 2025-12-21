@@ -1,14 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getAllArtists } from '../data/dataLoader';
+import ArtistCard from '../components/ArtistCard';
 import './Experiences.css';
 
 function Experiences() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [experiences, setExperiences] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Placeholder data - you can add your themed nights here
-  const experiences = [];
+  useEffect(() => {
+    const loadExperiences = async () => {
+      setLoading(true);
+      try {
+        const allActs = await getAllArtists();
+        // Filter acts that have 'themed-nights' category
+        const themedNights = allActs.filter(act => 
+          act.act_category?.includes('themed-nights') || 
+          act.categories?.some(cat => cat.toLowerCase().includes('themed night'))
+        );
+        setExperiences(themedNights);
+      } catch (error) {
+        console.error('Error loading themed nights:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadExperiences();
+  }, []);
 
   const filteredExperiences = experiences.filter(experience =>
-    experience.name?.toLowerCase().includes(searchTerm.toLowerCase())
+    experience.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    experience.tribute?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    experience.description?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -30,7 +54,11 @@ function Experiences() {
           />
         </div>
 
-        {experiences.length === 0 ? (
+        {loading ? (
+          <div className="loading-spinner">
+            <p>🎉 Loading themed nights...</p>
+          </div>
+        ) : experiences.length === 0 ? (
           <div className="coming-soon">
             <h2>Coming Soon!</h2>
             <p>We're currently curating an exciting range of themed entertainment nights.</p>
@@ -38,7 +66,9 @@ function Experiences() {
           </div>
         ) : filteredExperiences.length > 0 ? (
           <div className="experiences-grid">
-            {/* Themed night cards will go here when you add data */}
+            {filteredExperiences.map(experience => (
+              <ArtistCard key={experience.id} artist={experience} />
+            ))}
           </div>
         ) : (
           <div className="no-results">

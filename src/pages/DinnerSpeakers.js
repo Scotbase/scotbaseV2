@@ -1,14 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getAllArtists } from '../data/dataLoader';
+import ArtistCard from '../components/ArtistCard';
 import './DinnerSpeakers.css';
 
 function DinnerSpeakers() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [speakers, setSpeakers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Placeholder data - you can add your dinner speakers here
-  const speakers = [];
+  useEffect(() => {
+    const loadSpeakers = async () => {
+      setLoading(true);
+      try {
+        const allActs = await getAllArtists();
+        // Filter acts that have 'dinner-speakers' category
+        const dinnerSpeakers = allActs.filter(act => 
+          act.act_category?.includes('dinner-speakers') || 
+          act.categories?.some(cat => cat.toLowerCase().includes('dinner speaker'))
+        );
+        setSpeakers(dinnerSpeakers);
+      } catch (error) {
+        console.error('Error loading dinner speakers:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadSpeakers();
+  }, []);
 
   const filteredSpeakers = speakers.filter(speaker =>
-    speaker.name?.toLowerCase().includes(searchTerm.toLowerCase())
+    speaker.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    speaker.tribute?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    speaker.description?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -30,7 +54,11 @@ function DinnerSpeakers() {
           />
         </div>
 
-        {speakers.length === 0 ? (
+        {loading ? (
+          <div className="loading-spinner">
+            <p>🎤 Loading speakers...</p>
+          </div>
+        ) : speakers.length === 0 ? (
           <div className="coming-soon">
             <h2>Coming Soon!</h2>
             <p>We're currently building our roster of professional dinner speakers.</p>
@@ -38,7 +66,9 @@ function DinnerSpeakers() {
           </div>
         ) : filteredSpeakers.length > 0 ? (
           <div className="speakers-grid">
-            {/* Speaker cards will go here when you add data */}
+            {filteredSpeakers.map(speaker => (
+              <ArtistCard key={speaker.id} artist={speaker} />
+            ))}
           </div>
         ) : (
           <div className="no-results">

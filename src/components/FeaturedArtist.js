@@ -68,14 +68,6 @@ function FeaturedArtist({ artist }) {
               <span>{artist.genre}</span>
             </div>
             <div className="featured-detail">
-              <span className="detail-icon">📍</span>
-              <span>{artist.location}</span>
-            </div>
-            <div className="featured-detail">
-              <span className="detail-icon">💰</span>
-              <span>{artist.price}</span>
-            </div>
-            <div className="featured-detail">
               <span className="detail-icon">✅</span>
               <span>{artist.bookingCount} successful bookings</span>
             </div>

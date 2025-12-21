@@ -4,18 +4,6 @@ import { handleImageError } from '../utils/imageHelper';
 import './ArtistCard.css';
 
 function ArtistCard({ artist }) {
-  const handleVideoClick = (e) => {
-    e.preventDefault();
-    if (artist.videoUrl) {
-      window.open(artist.videoUrl, '_blank');
-    }
-  };
-
-  const handleEnquiryClick = (e) => {
-    e.preventDefault();
-    window.location.href = `/contact?artist=${encodeURIComponent(artist.name)}`;
-  };
-
   // Star rating display
   const renderStars = (rating) => {
     const stars = [];
@@ -30,7 +18,7 @@ function ArtistCard({ artist }) {
   };
 
   return (
-    <div className="artist-card-link">
+    <Link to={`/artist/${artist.id}`} className="artist-card-link">
       <div className="artist-card">
         <div className="artist-image-container">
           <img 
@@ -52,23 +40,6 @@ function ArtistCard({ artist }) {
           {artist.featured && <span className="featured-badge">⭐ Featured</span>}
           <div className="availability-badge" data-status={artist.availability.toLowerCase()}>
             {artist.availability}
-          </div>
-
-          {/* Hover overlay with actions */}
-          <div className="card-overlay">
-            <div className="overlay-buttons">
-              <Link to={`/artist/${artist.id}`} className="overlay-btn overlay-btn-primary">
-                View Details
-              </Link>
-              {artist.videoUrl && (
-                <button onClick={handleVideoClick} className="overlay-btn overlay-btn-video">
-                  🎬 Watch Video
-                </button>
-              )}
-              <button onClick={handleEnquiryClick} className="overlay-btn overlay-btn-secondary">
-                Quick Enquiry
-              </button>
-            </div>
           </div>
         </div>
 
@@ -95,7 +66,6 @@ function ArtistCard({ artist }) {
 
           <div className="artist-meta">
             <span className="artist-genre">🎵 {artist.genre}</span>
-            <span className="artist-location">📍 {artist.location}</span>
           </div>
 
           {/* Genre tags */}
@@ -106,16 +76,9 @@ function ArtistCard({ artist }) {
               ))}
             </div>
           )}
-
-          {/* Price display */}
-          {artist.price && (
-            <div className="artist-price-display">
-              <span className="price-label">From</span> {artist.price}
-            </div>
-          )}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
