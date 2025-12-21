@@ -61,6 +61,8 @@ function Artists() {
       artist.tribute?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       artist.genre?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       artist.location?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (artist.genres && artist.genres.some(genre => genre.toLowerCase().includes(searchTerm.toLowerCase()))) ||
+      (artist.categories && artist.categories.some(cat => cat.toLowerCase().includes(searchTerm.toLowerCase()))) ||
       (artist.tags && artist.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())));
     
     // Tag filter - artist must have ALL selected tags
@@ -77,7 +79,7 @@ function Artists() {
       <div className="artists-page">
         <section className="artists-hero">
           <h1>Browse Our Performance Acts</h1>
-          <p>Loading acts from CMS...</p>
+          <p>Loading acts...</p>
         </section>
         <div className="artists-container">
           <div className="loading-spinner">
