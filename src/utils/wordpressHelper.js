@@ -4,6 +4,16 @@
 const WP_API_BASE = 'https://cms.scotbase.net/wp-json/wp/v2';
 
 /**
+ * Decode HTML entities (e.g., &amp; to &)
+ */
+const decodeHTMLEntities = (text) => {
+  if (!text) return text;
+  const textarea = document.createElement('textarea');
+  textarea.innerHTML = text;
+  return textarea.value;
+};
+
+/**
  * Fetch taxonomy terms and media by IDs
  */
 const categoryCache = {};
@@ -18,7 +28,10 @@ export const fetchCategoryName = async (categoryId) => {
   try {
     const response = await fetch(`${WP_API_BASE}/act_category/${categoryId}`);
     const category = await response.json();
-    categoryCache[categoryId] = { name: category.name, slug: category.slug };
+    categoryCache[categoryId] = { 
+      name: decodeHTMLEntities(category.name), 
+      slug: category.slug 
+    };
     return categoryCache[categoryId];
   } catch (error) {
     console.error(`Error fetching category ${categoryId}:`, error);
@@ -34,7 +47,10 @@ export const fetchGenreName = async (genreId) => {
   try {
     const response = await fetch(`${WP_API_BASE}/act_genre/${genreId}`);
     const genre = await response.json();
-    genreCache[genreId] = { name: genre.name, slug: genre.slug };
+    genreCache[genreId] = { 
+      name: decodeHTMLEntities(genre.name), 
+      slug: genre.slug 
+    };
     return genreCache[genreId];
   } catch (error) {
     console.error(`Error fetching genre ${genreId}:`, error);

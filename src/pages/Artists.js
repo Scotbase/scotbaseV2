@@ -8,8 +8,8 @@ import './Artists.css';
 function Artists() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTags, setSelectedTags] = useState([]);
-  const [selectedParentCategory, setSelectedParentCategory] = useState(null);
-  const [selectedGenre, setSelectedGenre] = useState(null);
+  const [selectedParentCategory, setSelectedParentCategory] = useState([]);
+  const [selectedGenre, setSelectedGenre] = useState([]);
   const [artists, setArtists] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -39,17 +39,21 @@ function Artists() {
 
   // Filter artists based on genre, parent category, search, and tags
   const filteredArtists = artists.filter(artist => {
-    // Genre filter (matches against artist.genre or artist.act_genre slug)
-    const matchesGenre = !selectedGenre || 
-      artist.genre?.toLowerCase() === selectedGenre.toLowerCase() ||
-      artist.act_genre?.some(g => g === selectedGenre) ||
-      (Array.isArray(artist.act_genre) && artist.act_genre.includes(selectedGenre));
+    // Genre filter - OR logic (matches if artist has ANY of the selected genres)
+    const matchesGenre = selectedGenre.length === 0 || 
+      selectedGenre.some(genreSlug => 
+        artist.genre?.toLowerCase() === genreSlug.toLowerCase() ||
+        artist.act_genre?.some(g => g === genreSlug) ||
+        (Array.isArray(artist.act_genre) && artist.act_genre.includes(genreSlug))
+      );
     
-    // Parent category filter
-    const matchesParentCategory = !selectedParentCategory || 
-      artist.parentCategory === selectedParentCategory ||
-      artist.act_category?.some(c => c === selectedParentCategory) ||
-      (Array.isArray(artist.act_category) && artist.act_category.includes(selectedParentCategory));
+    // Parent category filter - OR logic (matches if artist has ANY of the selected categories)
+    const matchesParentCategory = selectedParentCategory.length === 0 || 
+      selectedParentCategory.some(categorySlug =>
+        artist.parentCategory === categorySlug ||
+        artist.act_category?.some(c => c === categorySlug) ||
+        (Array.isArray(artist.act_category) && artist.act_category.includes(categorySlug))
+      );
     
     // Search filter
     const matchesSearch = 
@@ -108,11 +112,8 @@ function Artists() {
         {/* Results Count */}
         <div className="results-info">
           <p>
-            Showing {filteredArtists.length} {
-              selectedParentCategory 
-                ? (filteredArtists.length === 1 ? selectedParentCategory.replace(/s$/, '') : selectedParentCategory)
-                : `performance act${filteredArtists.length !== 1 ? 's' : ''}`
-            }
+            Showing {filteredArtists.length} performance act{filteredArtists.length !== 1 ? 's' : ''}
+            {(selectedGenre.length > 0 || selectedParentCategory.length > 0) && ' matching your filters'}
             {selectedTags.length > 0 && ` with ${selectedTags.length} tag${selectedTags.length !== 1 ? 's' : ''}`}
           </p>
         </div>
@@ -128,13 +129,13 @@ function Artists() {
           <div className="no-results">
             <h3>No performance acts found</h3>
             <p>Try adjusting your search or filter criteria</p>
-            {(selectedTags.length > 0 || selectedParentCategory || selectedGenre) && (
+            {(selectedTags.length > 0 || selectedParentCategory.length > 0 || selectedGenre.length > 0) && (
               <button 
                 className="clear-filters-btn"
                 onClick={() => {
                   setSelectedTags([]);
-                  setSelectedParentCategory(null);
-                  setSelectedGenre(null);
+                  setSelectedParentCategory([]);
+                  setSelectedGenre([]);
                 }}
               >
                 Clear All Filters

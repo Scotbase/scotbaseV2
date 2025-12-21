@@ -17,7 +17,7 @@ function Testimonials() {
     },
     {
       id: 3,
-      name: "Elizabeth Marshall",
+      name: "Elisabeth Marshall",
       rating: 5,
       text: "First class acts run by experienced team",
       date: "June 2019"

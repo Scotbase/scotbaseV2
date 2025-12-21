@@ -9,6 +9,16 @@ let lastFetchTime = null;
 const CACHE_DURATION = 10 * 60 * 1000; // 10 minutes
 
 /**
+ * Decode HTML entities (e.g., &amp; to &)
+ */
+const decodeHTMLEntities = (text) => {
+  if (!text) return text;
+  const textarea = document.createElement('textarea');
+  textarea.innerHTML = text;
+  return textarea.value;
+};
+
+/**
  * Fetch act genres from WordPress
  */
 export const fetchActGenres = async () => {
@@ -27,7 +37,7 @@ export const fetchActGenres = async () => {
     // Transform WordPress taxonomy to simple format
     genresCache = data.map(genre => ({
       id: genre.id,
-      name: genre.name,
+      name: decodeHTMLEntities(genre.name),
       slug: genre.slug,
       count: genre.count || 0
     }));
@@ -60,7 +70,7 @@ export const fetchActCategories = async () => {
     // Transform WordPress taxonomy to simple format
     categoriesCache = data.map(category => ({
       id: category.id,
-      name: category.name,
+      name: decodeHTMLEntities(category.name),
       slug: category.slug,
       count: category.count || 0
     }));

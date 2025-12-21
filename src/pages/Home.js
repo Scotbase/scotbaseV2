@@ -90,9 +90,9 @@ function Home() {
           ))}
         </div>
         <div className="hero-content">
-          <h1 className="hero-title">Scotland's Premier Performance Act Booking Agency</h1>
+          <h1 className="hero-title">Scotland's Premier Entertainment Agency</h1>
           <p className="hero-subtitle">
-            Book the best performance acts and entertainment for your events
+            Book performance acts, dinner speakers, and themed entertainment across the UK
           </p>
           <div className="hero-buttons">
             <Link to="/artists" className="btn btn-primary">

@@ -95,21 +95,57 @@ function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParen
     genre.name.toLowerCase().includes(genreSearch.toLowerCase())
   );
 
+  // Calculate actual counts for genres based on current artists
+  const genresWithCounts = filteredGenres.map(genre => {
+    const count = artists.filter(artist => 
+      artist.genre?.toLowerCase() === genre.slug.toLowerCase() ||
+      artist.act_genre?.some(g => g === genre.slug) ||
+      (Array.isArray(artist.act_genre) && artist.act_genre.includes(genre.slug))
+    ).length;
+    return { ...genre, actualCount: count };
+  });
+
   // Filter categories by search
   const filteredCategories = parentCategories.filter(category =>
     category.name.toLowerCase().includes(categorySearch.toLowerCase())
   );
 
+  // Calculate actual counts for categories based on current artists
+  const categoriesWithCounts = filteredCategories.map(category => {
+    const count = artists.filter(artist =>
+      artist.parentCategory === category.slug ||
+      artist.act_category?.some(c => c === category.slug) ||
+      (Array.isArray(artist.act_category) && artist.act_category.includes(category.slug))
+    ).length;
+    return { ...category, actualCount: count };
+  });
+
+  // Handle genre toggle (multi-select)
+  const handleGenreToggle = (genreSlug) => {
+    const newGenres = selectedGenre.includes(genreSlug)
+      ? selectedGenre.filter(g => g !== genreSlug)
+      : [...selectedGenre, genreSlug];
+    onGenreChange(newGenres);
+  };
+
+  // Handle category toggle (multi-select)
+  const handleCategoryToggle = (categorySlug) => {
+    const newCategories = selectedParentCategory.includes(categorySlug)
+      ? selectedParentCategory.filter(c => c !== categorySlug)
+      : [...selectedParentCategory, categorySlug];
+    onParentCategoryChange(newCategories);
+  };
+
   // Count active filters
   const activeFilterCount = 
-    (selectedGenre ? 1 : 0) + 
-    (selectedParentCategory ? 1 : 0) + 
+    selectedGenre.length + 
+    selectedParentCategory.length + 
     selectedTags.length;
 
   // Clear all filters
   const handleClearAllFilters = () => {
-    onGenreChange(null);
-    onParentCategoryChange(null);
+    onGenreChange([]);
+    onParentCategoryChange([]);
     onTagsChange([]);
     setGenreSearch('');
     setCategorySearch('');
@@ -145,18 +181,24 @@ function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParen
       {activeFilterCount > 0 && (
         <div className="active-filters-display">
           <span className="active-filters-label">Active filters:</span>
-          {selectedGenre && (
-            <span className="active-filter-chip">
-              Genre: {genres.find(g => g.slug === selectedGenre)?.name}
-              <button onClick={() => onGenreChange(null)}>×</button>
-            </span>
-          )}
-          {selectedParentCategory && (
-            <span className="active-filter-chip">
-              Category: {parentCategories.find(c => (c.slug || c.name) === selectedParentCategory)?.name}
-              <button onClick={() => onParentCategoryChange(null)}>×</button>
-            </span>
-          )}
+          {selectedGenre.map(genreSlug => {
+            const genre = genres.find(g => g.slug === genreSlug);
+            return genre ? (
+              <span key={genreSlug} className="active-filter-chip">
+                {genre.name}
+                <button onClick={() => handleGenreToggle(genreSlug)}>×</button>
+              </span>
+            ) : null;
+          })}
+          {selectedParentCategory.map(categorySlug => {
+            const category = parentCategories.find(c => (c.slug || c.name) === categorySlug);
+            return category ? (
+              <span key={categorySlug} className="active-filter-chip">
+                {category.name}
+                <button onClick={() => handleCategoryToggle(categorySlug)}>×</button>
+              </span>
+            ) : null;
+          })}
           {selectedTags.map(tag => (
             <span key={tag} className="active-filter-chip">
               {tag}
@@ -191,19 +233,16 @@ function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParen
                     />
                   </div>
                   <div className="filter-buttons-grid">
-                    <button
-                      className={`filter-btn ${!selectedGenre ? 'selected' : ''}`}
-                      onClick={() => onGenreChange(null)}
-                    >
-                      All Genres
-                    </button>
-                    {filteredGenres.map(genre => (
+                    {genresWithCounts.map(genre => (
                       <button
                         key={genre.id}
-                        className={`filter-btn ${selectedGenre === genre.slug ? 'selected' : ''}`}
-                        onClick={() => onGenreChange(genre.slug)}
+                        className={`filter-btn ${selectedGenre.includes(genre.slug) ? 'selected' : ''}`}
+                        onClick={() => handleGenreToggle(genre.slug)}
                       >
-                        {genre.name} {genre.count > 0 && `(${genre.count})`}
+                        <span className="filter-checkbox">
+                          {selectedGenre.includes(genre.slug) ? '☑' : '☐'}
+                        </span>
+                        {genre.name} {genre.actualCount > 0 && `(${genre.actualCount})`}
                       </button>
                     ))}
                   </div>
@@ -235,19 +274,16 @@ function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParen
                     />
                   </div>
                   <div className="filter-buttons-grid">
-                    <button
-                      className={`filter-btn ${!selectedParentCategory ? 'selected' : ''}`}
-                      onClick={() => onParentCategoryChange(null)}
-                    >
-                      All Acts
-                    </button>
-                    {filteredCategories.map(category => (
+                    {categoriesWithCounts.map(category => (
                       <button
                         key={category.id || category.name}
-                        className={`filter-btn ${selectedParentCategory === (category.slug || category.name) ? 'selected' : ''}`}
-                        onClick={() => onParentCategoryChange(category.slug || category.name)}
+                        className={`filter-btn ${selectedParentCategory.includes(category.slug || category.name) ? 'selected' : ''}`}
+                        onClick={() => handleCategoryToggle(category.slug || category.name)}
                       >
-                        {category.name} {category.count > 0 && `(${category.count})`}
+                        <span className="filter-checkbox">
+                          {selectedParentCategory.includes(category.slug || category.name) ? '☑' : '☐'}
+                        </span>
+                        {category.name} {category.actualCount > 0 && `(${category.actualCount})`}
                       </button>
                     ))}
                   </div>
