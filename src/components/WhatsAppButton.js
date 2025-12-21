@@ -4,7 +4,7 @@ import './WhatsAppButton.css';
 function WhatsAppButton() {
   // Replace with your actual WhatsApp business number
   // Format: country code + number (no + sign, spaces, or dashes)
-  const phoneNumber = '44777181555'; // 0141 849 0333
+  const phoneNumber = '447771811555'; // 0141 849 0333
   const message = encodeURIComponent('Hi Scotbase! I\'m interested in booking a tribute act for my event.');
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 
