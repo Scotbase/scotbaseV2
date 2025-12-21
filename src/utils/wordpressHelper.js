@@ -1,7 +1,7 @@
 // src/utils/wordpressHelper.js
 // Helper to fetch and parse acts from WordPress API
 
-const WP_API_BASE = 'https://scotbase.net/wp-json/wp/v2';
+const WP_API_BASE = 'https://cms.scotbase.net/wp-json/wp/v2';
 
 /**
  * Fetch taxonomy terms and media by IDs

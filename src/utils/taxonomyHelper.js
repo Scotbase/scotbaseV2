@@ -1,7 +1,7 @@
 // src/utils/taxonomyHelper.js
 // Fetch genres and categories from WordPress REST API
 
-const BASE_URL = 'https://scotbase.net/wp-json/wp/v2';
+const BASE_URL = 'https://cms.scotbase.net/wp-json/wp/v2';
 
 let genresCache = null;
 let categoriesCache = null;

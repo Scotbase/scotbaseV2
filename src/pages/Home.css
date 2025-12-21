@@ -47,7 +47,7 @@
   right: 0;
   bottom: 0;
   background-size: cover;
-  background-position: center;
+  background-position: center 30%;
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
   animation: kenBurns 20s ease-in-out infinite;

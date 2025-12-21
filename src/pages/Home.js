@@ -5,7 +5,7 @@ import ArtistCard from '../components/ArtistCard';
 import Testimonials from '../components/Testimonials';
 import StatsCounter from '../components/StatsCounter';
 // import CMSTestAct from '../components/CMSTestAct'; // Commented out - demo section removed
-import { getFeaturedArtists, getPopularArtists } from '../data/dataLoader';
+import { getFeaturedArtists, getPopularArtists, getAllArtists } from '../data/dataLoader';
 // import { getCMSActs } from '../data/dataLoader'; // Commented out - CMS demo removed
 import './Home.css';
 
@@ -13,20 +13,16 @@ function Home() {
   const [randomFeatured, setRandomFeatured] = useState(null);
   const [popularArtists, setPopularArtists] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [heroImages, setHeroImages] = useState([]);
   // const [cmsActsCount, setCmsActsCount] = useState(0); // Commented out - CMS demo removed
   // const [loading, setLoading] = useState(true); // Removed - not used after commenting out CMS demo
-
-  // Hero background images
-  const heroImages = [
-    '/images/abba-a-rival-quartet.png',
-    '/images/forever-abba.png',
-    '/images/super-troopers.png',
-    '/images/gimme-abba.png'
-  ];
 
   useEffect(() => {
     const loadData = async () => {
       try {
+        // Get all artists to populate hero slideshow
+        const allActs = await getAllArtists();
+        
         // Get featured and popular artists (now includes WordPress data)
         const featured = await getFeaturedArtists();
         const popular = await getPopularArtists(6);
@@ -38,8 +34,33 @@ function Home() {
         }
         
         setPopularArtists(popular);
+        
+        // Use images from acts for hero slideshow
+        // Filter to get acts with images and take up to 5
+        const actsWithImages = allActs
+          .filter(act => act.image && !act.image.includes('placeholder'))
+          .slice(0, 5);
+        
+        if (actsWithImages.length > 0) {
+          setHeroImages(actsWithImages.map(act => act.image));
+        } else {
+          // Fallback to default images if no acts available
+          setHeroImages([
+            '/images/abba-a-rival-quartet.png',
+            '/images/forever-abba.png',
+            '/images/super-troopers.png',
+            '/images/gimme-abba.png'
+          ]);
+        }
       } catch (error) {
         console.error('❌ Error loading home page data:', error);
+        // Fallback to default images on error
+        setHeroImages([
+          '/images/abba-a-rival-quartet.png',
+          '/images/forever-abba.png',
+          '/images/super-troopers.png',
+          '/images/gimme-abba.png'
+        ]);
       }
     };
 

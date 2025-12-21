@@ -45,8 +45,8 @@ function ArtistDetail() {
   };
 
   useEffect(() => {
-    // Scroll to top when artist changes
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Scroll to top immediately when page loads
+    window.scrollTo(0, 0);
     
     const loadArtist = async () => {
       setLoading(true);
