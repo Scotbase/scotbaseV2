@@ -1,6 +1,7 @@
+# Allow all crawlers access to all public pages
 User-agent: *
-Allow: /
+Disallow: /private/
+Disallow: /tmp/
 
-# Sitemap
-Sitemap: https://scotbase.co.uk/sitemap.xml
-
+# Sitemap location for SEO
+Sitemap: https://scotbase.com/sitemap.xml
