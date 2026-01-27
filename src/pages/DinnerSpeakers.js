@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { getAllArtists } from '../data/dataLoader';
 import ArtistCard from '../components/ArtistCard';
+import ArtistCardSkeleton from '../components/ArtistCardSkeleton';
+import SEO from '../components/SEO';
 import './DinnerSpeakers.css';
 
 function DinnerSpeakers() {
@@ -11,6 +13,9 @@ function DinnerSpeakers() {
   useEffect(() => {
     const loadSpeakers = async () => {
       setLoading(true);
+      const startTime = Date.now();
+      const minLoadingTime = 500; // Minimum 500ms to show skeleton
+      
       try {
         const allActs = await getAllArtists();
         // Filter acts that have 'dinner-speakers' category
@@ -22,7 +27,12 @@ function DinnerSpeakers() {
       } catch (error) {
         console.error('Error loading dinner speakers:', error);
       } finally {
-        setLoading(false);
+        // Ensure minimum loading time for better UX
+        const elapsed = Date.now() - startTime;
+        const remaining = Math.max(0, minLoadingTime - elapsed);
+        setTimeout(() => {
+          setLoading(false);
+        }, remaining);
       }
     };
 
@@ -37,6 +47,12 @@ function DinnerSpeakers() {
 
   return (
     <div className="dinner-speakers-page">
+      <SEO 
+        title="Dinner Speakers"
+        description="Book professional dinner speakers for your corporate events, awards dinners, and special occasions across Scotland. Engaging speakers to entertain and inspire your guests."
+        url="/dinner-speakers"
+        image="/images/scotbase-logo.png"
+      />
       <section className="dinner-speakers-hero">
         <h1>Dinner Speakers</h1>
         <p>Professional speakers for your corporate events and dinners</p>
@@ -55,8 +71,10 @@ function DinnerSpeakers() {
         </div>
 
         {loading ? (
-          <div className="loading-spinner">
-            <p>🎤 Loading speakers...</p>
+          <div className="speakers-grid">
+            {[...Array(6)].map((_, index) => (
+              <ArtistCardSkeleton key={index} />
+            ))}
           </div>
         ) : speakers.length === 0 ? (
           <div className="coming-soon">

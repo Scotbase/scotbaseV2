@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import ArtistCard from '../components/ArtistCard';
+import ArtistCardSkeleton from '../components/ArtistCardSkeleton';
 import SearchBar from '../components/SearchBar';
 import FilterBar from '../components/FilterBar';
+import SEO from '../components/SEO';
 import { getAllArtists } from '../data/dataLoader';
 import './Artists.css';
 
@@ -16,6 +18,9 @@ function Artists() {
   // Load artists from CMS + hardcoded data
   useEffect(() => {
     const loadArtists = async () => {
+      const startTime = Date.now();
+      const minLoadingTime = 500; // Minimum 500ms to show skeleton
+      
       try {
         const allArtists = await getAllArtists();
         // Filter out acts that are categorized as dinner speakers or themed nights
@@ -30,7 +35,12 @@ function Artists() {
       } catch (error) {
         console.error('Error loading artists:', error);
       } finally {
-        setLoading(false);
+        // Ensure minimum loading time for better UX
+        const elapsed = Date.now() - startTime;
+        const remaining = Math.max(0, minLoadingTime - elapsed);
+        setTimeout(() => {
+          setLoading(false);
+        }, remaining);
       }
     };
 
@@ -75,15 +85,40 @@ function Artists() {
   });
 
   if (loading) {
+    console.log('🔄 Showing skeleton loaders...');
     return (
       <div className="artists-page">
+        <SEO 
+          title="Performance Acts"
+          description="Browse our extensive collection of professional tribute acts available for booking across Scotland."
+          url="/artists"
+          image="/images/scotbase-logo.png"
+        />
         <section className="artists-hero">
           <h1>Browse Our Performance Acts</h1>
-          <p>Loading acts...</p>
+          <p>Find the perfect performance act for your event</p>
         </section>
         <div className="artists-container">
-          <div className="loading-spinner">
-            <p>🎵 Loading tribute acts...</p>
+          <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+          <div className="artists-layout">
+            <aside className="filters-sidebar">
+              <FilterBar 
+                selectedTags={selectedTags}
+                onTagsChange={setSelectedTags}
+                selectedGenre={selectedGenre}
+                onGenreChange={setSelectedGenre}
+                selectedParentCategory={selectedParentCategory}
+                onParentCategoryChange={setSelectedParentCategory}
+                artists={[]}
+              />
+            </aside>
+            <main className="artists-main-content">
+              <div className="artists-grid">
+                {[...Array(6)].map((_, index) => (
+                  <ArtistCardSkeleton key={index} />
+                ))}
+              </div>
+            </main>
           </div>
         </div>
       </div>
@@ -92,6 +127,12 @@ function Artists() {
 
   return (
     <div className="artists-page">
+      <SEO 
+        title="Performance Acts"
+        description="Browse our extensive collection of professional tribute acts available for booking across Scotland. Find the perfect entertainment for your wedding, corporate event, or private party."
+        url="/artists"
+        image="/images/scotbase-logo.png"
+      />
       <section className="artists-hero">
         <h1>Browse Our Performance Acts</h1>
         <p>Find the perfect performance act for your event</p>
@@ -100,51 +141,58 @@ function Artists() {
       <div className="artists-container">
         <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
         
-        {/* Genre, Category and Tag Filters */}
-        <FilterBar 
-          selectedTags={selectedTags}
-          onTagsChange={setSelectedTags}
-          selectedGenre={selectedGenre}
-          onGenreChange={setSelectedGenre}
-          selectedParentCategory={selectedParentCategory}
-          onParentCategoryChange={setSelectedParentCategory}
-          artists={artists}
-        />
+        <div className="artists-layout">
+          {/* Sidebar with Filters */}
+          <aside className="filters-sidebar">
+            <FilterBar 
+              selectedTags={selectedTags}
+              onTagsChange={setSelectedTags}
+              selectedGenre={selectedGenre}
+              onGenreChange={setSelectedGenre}
+              selectedParentCategory={selectedParentCategory}
+              onParentCategoryChange={setSelectedParentCategory}
+              artists={artists}
+            />
+          </aside>
 
-        {/* Results Count */}
-        <div className="results-info">
-          <p>
-            Showing {filteredArtists.length} performance act{filteredArtists.length !== 1 ? 's' : ''}
-            {(selectedGenre.length > 0 || selectedParentCategory.length > 0) && ' matching your filters'}
-            {selectedTags.length > 0 && ` with ${selectedTags.length} tag${selectedTags.length !== 1 ? 's' : ''}`}
-          </p>
-        </div>
+          {/* Main Content Area */}
+          <main className="artists-main-content">
+            {/* Results Count */}
+            <div className="results-info">
+              <p>
+                Showing {filteredArtists.length} performance act{filteredArtists.length !== 1 ? 's' : ''}
+                {(selectedGenre.length > 0 || selectedParentCategory.length > 0) && ' matching your filters'}
+                {selectedTags.length > 0 && ` with ${selectedTags.length} tag${selectedTags.length !== 1 ? 's' : ''}`}
+              </p>
+            </div>
 
-        {/* Artists Grid */}
-        {filteredArtists.length > 0 ? (
-          <div className="artists-grid">
-            {filteredArtists.map(artist => (
-              <ArtistCard key={artist.id} artist={artist} />
-            ))}
-          </div>
-        ) : (
-          <div className="no-results">
-            <h3>No performance acts found</h3>
-            <p>Try adjusting your search or filter criteria</p>
-            {(selectedTags.length > 0 || selectedParentCategory.length > 0 || selectedGenre.length > 0) && (
-              <button 
-                className="clear-filters-btn"
-                onClick={() => {
-                  setSelectedTags([]);
-                  setSelectedParentCategory([]);
-                  setSelectedGenre([]);
-                }}
-              >
-                Clear All Filters
-              </button>
+            {/* Artists Grid */}
+            {filteredArtists.length > 0 ? (
+              <div className="artists-grid">
+                {filteredArtists.map(artist => (
+                  <ArtistCard key={artist.id} artist={artist} />
+                ))}
+              </div>
+            ) : (
+              <div className="no-results">
+                <h3>No performance acts found</h3>
+                <p>Try adjusting your search or filter criteria</p>
+                {(selectedTags.length > 0 || selectedParentCategory.length > 0 || selectedGenre.length > 0) && (
+                  <button 
+                    className="clear-filters-btn"
+                    onClick={() => {
+                      setSelectedTags([]);
+                      setSelectedParentCategory([]);
+                      setSelectedGenre([]);
+                    }}
+                  >
+                    Clear All Filters
+                  </button>
+                )}
+              </div>
             )}
-          </div>
-        )}
+          </main>
+        </div>
       </div>
     </div>
   );

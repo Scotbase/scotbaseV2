@@ -7,7 +7,9 @@ function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParen
   const [showTagFilters, setShowTagFilters] = useState(false);
   const [showGenreFilters, setShowGenreFilters] = useState(false); // Collapsed by default
   const [showCategoryFilters, setShowCategoryFilters] = useState(false); // Collapsed by default
-  const [showAllFilters, setShowAllFilters] = useState(false); // Master toggle
+  const [showMoreGenres, setShowMoreGenres] = useState(false);
+  const [showMoreCategories, setShowMoreCategories] = useState(false);
+  const [showMoreTags, setShowMoreTags] = useState({}); // Object to track show more for each tag category
   const [genreSearch, setGenreSearch] = useState('');
   const [categorySearch, setCategorySearch] = useState('');
   const [genres, setGenres] = useState([]);
@@ -151,65 +153,65 @@ function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParen
     setCategorySearch('');
   };
 
+  // Helper function to get items to display based on show more state
+  const getItemsToDisplay = (items, showMore, limit = 5) => {
+    if (showMore) return items;
+    return items.slice(0, limit);
+  };
+
+  // Helper function to check if scrollbar should appear (more than 10 items)
+  const shouldShowScrollbar = (items) => items.length > 10;
+
   return (
-    <div className="filter-bar">
-      {/* Master Filter Toggle Button */}
-      <div className="filter-master-toggle">
-        <button 
-          className={`filter-toggle-btn ${showAllFilters ? 'active' : ''}`}
-          onClick={() => setShowAllFilters(!showAllFilters)}
-        >
-          <span className="filter-icon">🔍</span>
-          <span className="filter-text">Filters</span>
-          {activeFilterCount > 0 && (
-            <span className="filter-badge">{activeFilterCount}</span>
-          )}
-          <span className="arrow">{showAllFilters ? '▼' : '▶'}</span>
-        </button>
-        
+    <div className="filter-bar sidebar-filter-bar">
+      {/* Filter Header */}
+      <div className="filter-header-sidebar">
+        <h2 className="filter-title">Filters</h2>
         {activeFilterCount > 0 && (
-          <button 
-            className="clear-all-filters-btn"
-            onClick={handleClearAllFilters}
-          >
-            Clear All
-          </button>
+          <span className="filter-badge">{activeFilterCount}</span>
         )}
       </div>
 
       {/* Active Filters Display */}
       {activeFilterCount > 0 && (
         <div className="active-filters-display">
-          <span className="active-filters-label">Active filters:</span>
-          {selectedGenre.map(genreSlug => {
-            const genre = genres.find(g => g.slug === genreSlug);
-            return genre ? (
-              <span key={genreSlug} className="active-filter-chip">
-                {genre.name}
-                <button onClick={() => handleGenreToggle(genreSlug)}>×</button>
+          <span className="active-filters-label">Active:</span>
+          <div className="active-filters-chips">
+            {selectedGenre.map(genreSlug => {
+              const genre = genres.find(g => g.slug === genreSlug);
+              return genre ? (
+                <span key={genreSlug} className="active-filter-chip">
+                  {genre.name}
+                  <button onClick={() => handleGenreToggle(genreSlug)}>×</button>
+                </span>
+              ) : null;
+            })}
+            {selectedParentCategory.map(categorySlug => {
+              const category = parentCategories.find(c => (c.slug || c.name) === categorySlug);
+              return category ? (
+                <span key={categorySlug} className="active-filter-chip">
+                  {category.name}
+                  <button onClick={() => handleCategoryToggle(categorySlug)}>×</button>
+                </span>
+              ) : null;
+            })}
+            {selectedTags.map(tag => (
+              <span key={tag} className="active-filter-chip">
+                {tag}
+                <button onClick={() => handleTagToggle(tag)}>×</button>
               </span>
-            ) : null;
-          })}
-          {selectedParentCategory.map(categorySlug => {
-            const category = parentCategories.find(c => (c.slug || c.name) === categorySlug);
-            return category ? (
-              <span key={categorySlug} className="active-filter-chip">
-                {category.name}
-                <button onClick={() => handleCategoryToggle(categorySlug)}>×</button>
-              </span>
-            ) : null;
-          })}
-          {selectedTags.map(tag => (
-            <span key={tag} className="active-filter-chip">
-              {tag}
-              <button onClick={() => handleTagToggle(tag)}>×</button>
-            </span>
-          ))}
+            ))}
+          </div>
+          <button 
+            className="clear-all-filters-btn"
+            onClick={handleClearAllFilters}
+          >
+            Clear All
+          </button>
         </div>
       )}
 
-      {showAllFilters && (
-        <div className="filter-sections">
+      <div className="filter-sections">
           {/* Genre Filter Section */}
           {genres.length > 0 && (
             <div className="filter-section">
@@ -232,20 +234,30 @@ function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParen
                       className="filter-search-input"
                     />
                   </div>
-                  <div className="filter-buttons-grid">
-                    {genresWithCounts.map(genre => (
-                      <button
-                        key={genre.id}
-                        className={`filter-btn ${selectedGenre.includes(genre.slug) ? 'selected' : ''}`}
-                        onClick={() => handleGenreToggle(genre.slug)}
-                      >
-                        <span className="filter-checkbox">
-                          {selectedGenre.includes(genre.slug) ? '☑' : '☐'}
-                        </span>
-                        {genre.name} {genre.actualCount > 0 && `(${genre.actualCount})`}
-                      </button>
-                    ))}
+                  <div className={`filter-options-container ${shouldShowScrollbar(genresWithCounts) && showMoreGenres ? 'scrollable' : ''}`}>
+                    <div className="filter-buttons-list">
+                      {getItemsToDisplay(genresWithCounts, showMoreGenres, 5).map(genre => (
+                        <button
+                          key={genre.id}
+                          className={`filter-btn ${selectedGenre.includes(genre.slug) ? 'selected' : ''}`}
+                          onClick={() => handleGenreToggle(genre.slug)}
+                        >
+                          <span className="filter-checkbox">
+                            {selectedGenre.includes(genre.slug) ? '☑' : '☐'}
+                          </span>
+                          {genre.name} {genre.actualCount > 0 && `(${genre.actualCount})`}
+                        </button>
+                      ))}
+                    </div>
                   </div>
+                  {genresWithCounts.length > 5 && (
+                    <button
+                      className="show-more-btn"
+                      onClick={() => setShowMoreGenres(!showMoreGenres)}
+                    >
+                      {showMoreGenres ? 'Show Less' : `Show More (${genresWithCounts.length - 5} more)`}
+                    </button>
+                  )}
                 </>
               )}
             </div>
@@ -273,20 +285,30 @@ function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParen
                       className="filter-search-input"
                     />
                   </div>
-                  <div className="filter-buttons-grid">
-                    {categoriesWithCounts.map(category => (
-                      <button
-                        key={category.id || category.name}
-                        className={`filter-btn ${selectedParentCategory.includes(category.slug || category.name) ? 'selected' : ''}`}
-                        onClick={() => handleCategoryToggle(category.slug || category.name)}
-                      >
-                        <span className="filter-checkbox">
-                          {selectedParentCategory.includes(category.slug || category.name) ? '☑' : '☐'}
-                        </span>
-                        {category.name} {category.actualCount > 0 && `(${category.actualCount})`}
-                      </button>
-                    ))}
+                  <div className={`filter-options-container ${shouldShowScrollbar(categoriesWithCounts) && showMoreCategories ? 'scrollable' : ''}`}>
+                    <div className="filter-buttons-list">
+                      {getItemsToDisplay(categoriesWithCounts, showMoreCategories, 5).map(category => (
+                        <button
+                          key={category.id || category.name}
+                          className={`filter-btn ${selectedParentCategory.includes(category.slug || category.name) ? 'selected' : ''}`}
+                          onClick={() => handleCategoryToggle(category.slug || category.name)}
+                        >
+                          <span className="filter-checkbox">
+                            {selectedParentCategory.includes(category.slug || category.name) ? '☑' : '☐'}
+                          </span>
+                          {category.name} {category.actualCount > 0 && `(${category.actualCount})`}
+                        </button>
+                      ))}
+                    </div>
                   </div>
+                  {categoriesWithCounts.length > 5 && (
+                    <button
+                      className="show-more-btn"
+                      onClick={() => setShowMoreCategories(!showMoreCategories)}
+                    >
+                      {showMoreCategories ? 'Show Less' : `Show More (${categoriesWithCounts.length - 5} more)`}
+                    </button>
+                  )}
                 </>
               )}
             </div>
@@ -303,7 +325,7 @@ function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParen
             </button>
 
             {showTagFilters && (
-              <div style={{ padding: '1rem 1.5rem' }}>
+              <div className="tag-filters-content">
                 {/* Selected Tags Display */}
                 {selectedTags.length > 0 && (
                   <div className="selected-tags" style={{ marginBottom: '1rem' }}>
@@ -336,20 +358,32 @@ function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParen
                         </button>
                         
                         {expandedCategory === category && (
-                          <div className="tag-list">
-                            {tags.map(tag => (
+                          <>
+                            <div className={`filter-options-container ${shouldShowScrollbar(tags) && showMoreTags[category] ? 'scrollable' : ''}`}>
+                              <div className="tag-list">
+                                {getItemsToDisplay(tags, showMoreTags[category], 5).map(tag => (
+                                  <button
+                                    key={tag}
+                                    className={`tag-button ${selectedTags.includes(tag) ? 'selected' : ''}`}
+                                    onClick={() => handleTagToggle(tag)}
+                                  >
+                                    <span className="tag-checkbox">
+                                      {selectedTags.includes(tag) ? '☑' : '☐'}
+                                    </span>
+                                    <span className="tag-name">{tag}</span>
+                                  </button>
+                                ))}
+                              </div>
+                            </div>
+                            {tags.length > 5 && (
                               <button
-                                key={tag}
-                                className={`tag-button ${selectedTags.includes(tag) ? 'selected' : ''}`}
-                                onClick={() => handleTagToggle(tag)}
+                                className="show-more-btn"
+                                onClick={() => setShowMoreTags(prev => ({ ...prev, [category]: !prev[category] }))}
                               >
-                                <span className="tag-checkbox">
-                                  {selectedTags.includes(tag) ? '☑' : '☐'}
-                                </span>
-                                <span className="tag-name">{tag}</span>
+                                {showMoreTags[category] ? 'Show Less' : `Show More (${tags.length - 5} more)`}
                               </button>
-                            ))}
-                          </div>
+                            )}
+                          </>
                         )}
                       </div>
                     )
@@ -359,7 +393,6 @@ function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParen
             )}
           </div>
         </div>
-      )}
     </div>
   );
 }

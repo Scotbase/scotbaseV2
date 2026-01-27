@@ -22,9 +22,29 @@
 }
 
 .artists-container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
+}
+
+.artists-layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.filters-sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 2rem;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+}
+
+.artists-main-content {
+  flex: 1;
+  min-width: 0;
 }
 
 /* Genre Filter */
@@ -124,6 +144,19 @@
 }
 
 /* Responsive Design */
+@media (max-width: 968px) {
+  .artists-layout {
+    flex-direction: column;
+  }
+
+  .filters-sidebar {
+    width: 100%;
+    position: relative;
+    top: 0;
+    max-height: none;
+  }
+}
+
 @media (max-width: 768px) {
   .artists-hero h1 {
     font-size: 2rem;
@@ -144,6 +177,14 @@
   .genre-button {
     font-size: 0.9rem;
     padding: 0.6rem 1.2rem;
+  }
+
+  .artists-container {
+    padding: 1rem;
+  }
+
+  .artists-layout {
+    gap: 1rem;
   }
 }
 

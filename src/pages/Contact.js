@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SEO from '../components/SEO';
 import './Contact.css';
 
 function Contact() {
@@ -28,6 +29,12 @@ function Contact() {
 
   return (
     <div className="contact-page">
+      <SEO 
+        title="Contact Us"
+        description="Get in touch with Scotbase Entertainment to book tribute acts, dinner speakers, or themed night experiences. We're here to help make your event unforgettable."
+        url="/contact"
+        image="/images/scotbase-logo.png"
+      />
       <section className="contact-hero">
         <h1>Get in Touch</h1>
         <p>Ready to book an artist? Have questions? We're here to help!</p>

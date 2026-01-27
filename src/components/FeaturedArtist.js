@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { handleImageError } from '../utils/imageHelper';
+import { decodeHtmlEntitiesSimple } from '../utils/htmlDecoder';
 import './FeaturedArtist.css';
 
 function FeaturedArtist({ artist }) {
@@ -36,7 +37,7 @@ function FeaturedArtist({ artist }) {
         <div className="featured-image-container">
           <img 
             src={artist.image} 
-            alt={artist.name} 
+            alt={decodeHtmlEntitiesSimple(artist.name)} 
             className="featured-image"
             onError={(e) => handleImageError(e, artist)}
           />
@@ -50,8 +51,8 @@ function FeaturedArtist({ artist }) {
           )}
         </div>
         <div className="featured-info">
-          <h3 className="featured-artist-name">{artist.name}</h3>
-          <p className="featured-artist-tribute">{artist.tribute}</p>
+          <h3 className="featured-artist-name">{decodeHtmlEntitiesSimple(artist.name)}</h3>
+          <p className="featured-artist-tribute">{decodeHtmlEntitiesSimple(artist.tribute)}</p>
           
           {/* Star rating */}
           {artist.rating && (
@@ -61,7 +62,7 @@ function FeaturedArtist({ artist }) {
             </div>
           )}
 
-          <p className="featured-artist-description">{artist.description}</p>
+          <p className="featured-artist-description">{decodeHtmlEntitiesSimple(artist.description)}</p>
           <div className="featured-details">
             <div className="featured-detail">
               <span className="detail-icon">🎵</span>

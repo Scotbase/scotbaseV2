@@ -6,6 +6,28 @@
   margin: 2rem auto;
 }
 
+.filter-bar.sidebar-filter-bar {
+  margin: 0;
+  padding: 1.25rem;
+}
+
+/* Filter Header for Sidebar */
+.filter-header-sidebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.filter-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+}
+
 /* Master Filter Toggle */
 .filter-master-toggle {
   display: flex;
@@ -55,12 +77,13 @@
 }
 
 .clear-all-filters-btn {
-  padding: 0.75rem 1.5rem;
+  width: 100%;
+  padding: 0.6rem 1rem;
   background: white;
   color: #666;
   border: 2px solid #e0e0e0;
   border-radius: 8px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
@@ -74,21 +97,26 @@
 
 /* Active Filters Display */
 .active-filters-display {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
   padding: 1rem;
   background: #f8f9ff;
   border-radius: 8px;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
   border: 1px solid #e0e8ff;
 }
 
 .active-filters-label {
   font-weight: 600;
   color: #666;
-  margin-right: 0.5rem;
+  margin-bottom: 0.75rem;
+  display: block;
+  font-size: 0.9rem;
+}
+
+.active-filters-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .active-filter-chip {
@@ -136,6 +164,7 @@
   border-radius: 8px;
   overflow: hidden;
   background: white;
+  margin-bottom: 1rem;
 }
 
 .filter-section-header {
@@ -143,7 +172,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1.5rem;
+  padding: 0.875rem 1rem;
   background: #f8f9ff;
   border: none;
   cursor: pointer;
@@ -161,7 +190,7 @@
 .filter-section-header h3 {
   margin: 0;
   color: #333;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 
@@ -173,7 +202,7 @@
 
 /* Filter Search Box */
 .filter-search-box {
-  padding: 1rem 1.5rem 0.5rem;
+  padding: 0.75rem 1rem 0.5rem;
 }
 
 .filter-search-input {
@@ -191,7 +220,43 @@
   box-shadow: 0 0 0 3px rgba(0, 101, 189, 0.1);
 }
 
-/* Filter Buttons Grid */
+/* Filter Options Container */
+.filter-options-container {
+  padding: 0.75rem 0;
+}
+
+.filter-options-container.scrollable {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.filter-options-container.scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.filter-options-container.scrollable::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.filter-options-container.scrollable::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.filter-options-container.scrollable::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* Filter Buttons List (for sidebar) */
+.filter-buttons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Filter Buttons Grid (for non-sidebar) */
 .filter-buttons-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -205,11 +270,15 @@
   background: white;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: #555;
   transition: all 0.3s;
-  text-align: center;
+  text-align: left;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .filter-btn:hover {
@@ -224,6 +293,27 @@
   color: white;
   border-color: #0065BD;
   box-shadow: 0 4px 12px rgba(0, 101, 189, 0.3);
+}
+
+/* Show More Button */
+.show-more-btn {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  margin-top: 0.75rem;
+  background: #f8f9ff;
+  color: #0065BD;
+  border: 2px solid #e0e8ff;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.show-more-btn:hover {
+  background: #e0e8ff;
+  border-color: #0065BD;
+  transform: translateY(-1px);
 }
 
 /* Responsive Design */
@@ -486,12 +576,17 @@
   font-size: 0.8rem;
 }
 
+/* Tag Filters Content */
+.tag-filters-content {
+  padding: 1rem 1.5rem;
+}
+
 /* Tag List */
 .tag-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 0.5rem;
-  padding: 1rem;
+  padding: 0;
   background: white;
   animation: expandDown 0.3s ease;
 }

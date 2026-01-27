@@ -1,37 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import FeaturedArtist from '../components/FeaturedArtist';
 import ArtistCard from '../components/ArtistCard';
+import ArtistCardSkeleton from '../components/ArtistCardSkeleton';
 import Testimonials from '../components/Testimonials';
 import StatsCounter from '../components/StatsCounter';
+import SEO from '../components/SEO';
 // import CMSTestAct from '../components/CMSTestAct'; // Commented out - demo section removed
-import { getFeaturedArtists, getPopularArtists, getAllArtists } from '../data/dataLoader';
+import { getPopularArtists, getAllArtists } from '../data/dataLoader';
 // import { getCMSActs } from '../data/dataLoader'; // Commented out - CMS demo removed
 import './Home.css';
 
 function Home() {
-  const [randomFeatured, setRandomFeatured] = useState(null);
   const [popularArtists, setPopularArtists] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [heroImages, setHeroImages] = useState([]);
+  const [loading, setLoading] = useState(true);
   // const [cmsActsCount, setCmsActsCount] = useState(0); // Commented out - CMS demo removed
-  // const [loading, setLoading] = useState(true); // Removed - not used after commenting out CMS demo
 
   useEffect(() => {
     const loadData = async () => {
+      setLoading(true);
+      const startTime = Date.now();
+      const minLoadingTime = 500; // Minimum 500ms to show skeleton
+      
       try {
         // Get all artists to populate hero slideshow
         const allActs = await getAllArtists();
         
-        // Get featured and popular artists (now includes WordPress data)
-        const featured = await getFeaturedArtists();
+        // Get popular artists (now includes WordPress data)
         const popular = await getPopularArtists(6);
-        
-        // Pick a random featured artist
-        if (featured.length > 0) {
-          const randomIndex = Math.floor(Math.random() * featured.length);
-          setRandomFeatured(featured[randomIndex]);
-        }
         
         setPopularArtists(popular);
         
@@ -61,6 +58,13 @@ function Home() {
           '/images/super-troopers.png',
           '/images/gimme-abba.png'
         ]);
+      } finally {
+        // Ensure minimum loading time for better UX
+        const elapsed = Date.now() - startTime;
+        const remaining = Math.max(0, minLoadingTime - elapsed);
+        setTimeout(() => {
+          setLoading(false);
+        }, remaining);
       }
     };
 
@@ -78,6 +82,12 @@ function Home() {
 
   return (
     <div className="home-page">
+      <SEO 
+        title="Home"
+        description="Scotland's premier entertainment agency. Book professional tribute acts, dinner speakers, and themed night experiences for weddings, corporate events, and private parties across Scotland."
+        url="/"
+        image="/images/scotbase-logo.png"
+      />
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-background">
@@ -120,18 +130,40 @@ function Home() {
       )}
       */}
 
-      {/* Featured Artist */}
-      {randomFeatured && <FeaturedArtist artist={randomFeatured} />}
+      {/* Featured Artist - Commented out for now */}
+      {/* {loading ? (
+        <section className="featured-artist-skeleton">
+          <div className="featured-artist-skeleton-container">
+            <div className="skeleton-featured-image"></div>
+            <div className="skeleton-featured-content">
+              <div className="skeleton-line skeleton-featured-title"></div>
+              <div className="skeleton-line skeleton-featured-subtitle"></div>
+              <div className="skeleton-line skeleton-featured-description"></div>
+              <div className="skeleton-line skeleton-featured-description short"></div>
+            </div>
+          </div>
+        </section>
+      ) : (
+        randomFeatured && <FeaturedArtist artist={randomFeatured} />
+      )} */}
 
       {/* Popular Artists Section */}
       <section className="popular-artists">
         <div className="popular-artists-container">
           <h2>Most Popular Acts</h2>
-          <div className="artists-grid">
-            {popularArtists.map(artist => (
-              <ArtistCard key={artist.id} artist={artist} />
-            ))}
-          </div>
+          {loading ? (
+            <div className="artists-grid">
+              {[...Array(6)].map((_, index) => (
+                <ArtistCardSkeleton key={index} />
+              ))}
+            </div>
+          ) : (
+            <div className="artists-grid">
+              {popularArtists.map(artist => (
+                <ArtistCard key={artist.id} artist={artist} />
+              ))}
+            </div>
+          )}
           <div className="view-all-container">
             <Link to="/artists" className="btn btn-primary">
               View All Performance Acts

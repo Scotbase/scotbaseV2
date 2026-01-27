@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { getAllArtists } from '../data/dataLoader';
 import ArtistCard from '../components/ArtistCard';
+import ArtistCardSkeleton from '../components/ArtistCardSkeleton';
+import SEO from '../components/SEO';
 import './Experiences.css';
 
 function Experiences() {
@@ -11,6 +13,9 @@ function Experiences() {
   useEffect(() => {
     const loadExperiences = async () => {
       setLoading(true);
+      const startTime = Date.now();
+      const minLoadingTime = 500; // Minimum 500ms to show skeleton
+      
       try {
         const allActs = await getAllArtists();
         // Filter acts that have 'themed-nights' category
@@ -22,7 +27,12 @@ function Experiences() {
       } catch (error) {
         console.error('Error loading themed nights:', error);
       } finally {
-        setLoading(false);
+        // Ensure minimum loading time for better UX
+        const elapsed = Date.now() - startTime;
+        const remaining = Math.max(0, minLoadingTime - elapsed);
+        setTimeout(() => {
+          setLoading(false);
+        }, remaining);
       }
     };
 
@@ -37,6 +47,12 @@ function Experiences() {
 
   return (
     <div className="experiences-page">
+      <SEO 
+        title="Themed Nights"
+        description="Discover our themed night experiences perfect for parties, events, and special occasions. From 80s nights to ABBA tributes, create unforgettable entertainment experiences."
+        url="/experiences"
+        image="/images/scotbase-logo.png"
+      />
       <section className="experiences-hero">
         <h1>Themed Nights</h1>
         <p>Unforgettable themed entertainment nights for every occasion</p>
@@ -55,8 +71,10 @@ function Experiences() {
         </div>
 
         {loading ? (
-          <div className="loading-spinner">
-            <p>🎉 Loading themed nights...</p>
+          <div className="experiences-grid">
+            {[...Array(6)].map((_, index) => (
+              <ArtistCardSkeleton key={index} />
+            ))}
           </div>
         ) : experiences.length === 0 ? (
           <div className="coming-soon">

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { handleImageError } from '../utils/imageHelper';
+import { decodeHtmlEntitiesSimple } from '../utils/htmlDecoder';
 import './ArtistCard.css';
 
 function ArtistCard({ artist }) {
@@ -23,7 +24,7 @@ function ArtistCard({ artist }) {
         <div className="artist-image-container">
           <img 
             src={artist.image} 
-            alt={artist.name} 
+            alt={decodeHtmlEntitiesSimple(artist.name)} 
             className="artist-image"
             onError={(e) => handleImageError(e, artist)}
           />
@@ -44,8 +45,8 @@ function ArtistCard({ artist }) {
         </div>
 
         <div className="artist-info">
-          <h3 className="artist-name">{artist.name}</h3>
-          <p className="artist-tribute">{artist.tribute}</p>
+          <h3 className="artist-name">{decodeHtmlEntitiesSimple(artist.name)}</h3>
+          <p className="artist-tribute">{decodeHtmlEntitiesSimple(artist.tribute)}</p>
           
           {/* Star rating */}
           {artist.rating && (
@@ -58,9 +59,12 @@ function ArtistCard({ artist }) {
           {/* Description preview */}
           {artist.description && (
             <p className="artist-description">
-              {artist.description.length > 120 
-                ? `${artist.description.substring(0, 120)}...` 
-                : artist.description}
+              {(() => {
+                const decoded = decodeHtmlEntitiesSimple(artist.description);
+                return decoded.length > 120 
+                  ? `${decoded.substring(0, 120)}...` 
+                  : decoded;
+              })()}
             </p>
           )}
 

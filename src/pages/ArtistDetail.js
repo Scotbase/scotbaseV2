@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getArtistById, getAllArtists } from '../data/dataLoader';
 import { handleImageError } from '../utils/imageHelper';
+import { decodeHtmlEntitiesSimple } from '../utils/htmlDecoder';
+import SEO from '../components/SEO';
+import ArtistDetailSkeleton from '../components/ArtistDetailSkeleton';
 import './ArtistDetail.css';
 
 function ArtistDetail() {
@@ -33,7 +36,7 @@ function ArtistDetail() {
   };
 
   const handleBookNow = () => {
-    navigate(`/contact?artist=${encodeURIComponent(artist.name)}`);
+    navigate(`/contact?artist=${encodeURIComponent(decodeHtmlEntitiesSimple(artist.name))}`);
   };
 
   const handleWatchVideo = (e) => {
@@ -50,6 +53,9 @@ function ArtistDetail() {
     
     const loadArtist = async () => {
       setLoading(true);
+      const startTime = Date.now();
+      const minLoadingTime = 500; // Minimum 500ms to show skeleton
+      
       try {
         const foundArtist = await getArtistById(id);
         setArtist(foundArtist);
@@ -65,7 +71,12 @@ function ArtistDetail() {
       } catch (error) {
         console.error('Error loading artist:', error);
       } finally {
-        setLoading(false);
+        // Ensure minimum loading time for better UX
+        const elapsed = Date.now() - startTime;
+        const remaining = Math.max(0, minLoadingTime - elapsed);
+        setTimeout(() => {
+          setLoading(false);
+        }, remaining);
       }
     };
 
@@ -75,9 +86,12 @@ function ArtistDetail() {
   if (loading) {
     return (
       <div className="artist-detail-page">
-        <div className="loading-spinner">
-          <p>🎵 Loading act details...</p>
-        </div>
+        <SEO 
+          title="Loading..."
+          description="Loading act details..."
+          url={`/artist/${id}`}
+        />
+        <ArtistDetailSkeleton />
       </div>
     );
   }
@@ -96,19 +110,27 @@ function ArtistDetail() {
 
   return (
     <div className="artist-detail-page">
+      <SEO 
+        title={decodeHtmlEntitiesSimple(artist.name)}
+        description={decodeHtmlEntitiesSimple(artist.description || `${artist.name} - Professional tribute act available for booking in Scotland. ${artist.genre ? `Specializing in ${artist.genre} music.` : ''} Perfect for weddings, corporate events, and private parties.`)}
+        url={`/artist/${artist.id}`}
+        image={artist.image}
+        type="article"
+        artist={artist}
+      />
       {/* Hero Section */}
       <div className="artist-detail-hero">
         <div className="hero-overlay"></div>
         <div className="hero-content-wrapper">
           <div className="breadcrumb">
-            <Link to="/">Home</Link> / <Link to="/artists">Acts</Link> / <span>{artist.name}</span>
+            <Link to="/">Home</Link> / <Link to="/artists">Acts</Link> / <span>{decodeHtmlEntitiesSimple(artist.name)}</span>
           </div>
           
           <div className="hero-main">
             <div className="hero-text">
               {artist.featured && <span className="featured-badge-hero">⭐ Featured Act</span>}
-              <h1 className="detail-artist-name">{artist.name}</h1>
-              <h2 className="detail-tribute">{artist.tribute}</h2>
+              <h1 className="detail-artist-name">{decodeHtmlEntitiesSimple(artist.name)}</h1>
+              <h2 className="detail-tribute">{decodeHtmlEntitiesSimple(artist.tribute)}</h2>
               
               {artist.rating && (
                 <div className="detail-rating">
@@ -168,7 +190,7 @@ function ArtistDetail() {
             <div className="hero-image-container">
               <img 
                 src={artist.image} 
-                alt={artist.name} 
+                alt={decodeHtmlEntitiesSimple(artist.name)} 
                 className="hero-artist-image"
                 onError={(e) => handleImageError(e, artist)}
               />
@@ -181,11 +203,11 @@ function ArtistDetail() {
       {videoId && (
         <section className="video-section" id="video-section">
           <div className="section-container">
-            <h2 className="section-title">Watch {artist.name} Perform</h2>
+            <h2 className="section-title">Watch {decodeHtmlEntitiesSimple(artist.name)} Perform</h2>
             <div className="video-wrapper">
               <iframe
                 src={`https://www.youtube.com/embed/${videoId}`}
-                title={`${artist.name} Performance`}
+                title={`${decodeHtmlEntitiesSimple(artist.name)} Performance`}
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -200,7 +222,7 @@ function ArtistDetail() {
       <section className="about-section">
         <div className="section-container">
           <h2 className="section-title">About This Act</h2>
-          <p className="about-text">{artist.description}</p>
+          <p className="about-text">{decodeHtmlEntitiesSimple(artist.description)}</p>
           
           {artist.tags && artist.tags.length > 0 && (
             <div className="tags-section">
@@ -218,7 +240,7 @@ function ArtistDetail() {
       {/* Why Book This Act */}
       <section className="why-book-section">
         <div className="section-container">
-          <h2 className="section-title">Why Book {artist.name}?</h2>
+          <h2 className="section-title">Why Book {decodeHtmlEntitiesSimple(artist.name)}?</h2>
           <div className="features-grid-detail">
             <div className="feature-card">
               <div className="feature-icon">🎭</div>
@@ -271,7 +293,7 @@ function ArtistDetail() {
       {/* CTA Section */}
       <section className="cta-section">
         <div className="cta-container">
-          <h2>Ready to Book {artist.name}?</h2>
+          <h2>Ready to Book {decodeHtmlEntitiesSimple(artist.name)}?</h2>
           <p>Get in touch today for availability and pricing</p>
           <div className="cta-buttons">
             <button onClick={handleBookNow} className="btn btn-large btn-cta-primary">
