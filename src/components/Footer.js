@@ -7,7 +7,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-section">
-          <h3>Scotbase Entertainment</h3>
+          <h3>Scotbase</h3>
           <p>Scotland's premier performance act booking agency</p>
         </div>
         <div className="footer-section">
@@ -21,7 +21,7 @@ function Footer() {
         <div className="footer-section">
           <h4>Contact</h4>
           <p>📧 info@scotbase.com</p>
-          <p>📞 0141 849 0333</p>
+          <p>📞 +44 7748 323748</p>
           <p>📍 103 Abercorn Street</p>
           <p style={{ marginLeft: '1.5rem' }}>Paisley, PA3 4AT</p>
         </div>
@@ -35,7 +35,7 @@ function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>&copy; 2025 Scotbase Entertainment. All rights reserved.</p>
+        <p>&copy; 2026 Scotbase Entertainment Ltd. All rights reserved.</p>
       </div>
     </footer>
   );

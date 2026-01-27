@@ -27,6 +27,15 @@
   padding: 2rem;
 }
 
+/* Search Bar Container - Centered */
+.artists-container > .search-bar-container {
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .artists-layout {
   display: flex;
   gap: 2rem;

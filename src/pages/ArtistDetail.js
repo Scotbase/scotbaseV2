@@ -266,30 +266,6 @@ function ArtistDetail() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="testimonials-detail-section">
-        <div className="section-container">
-          <h2 className="section-title">What Clients Say</h2>
-          <div className="testimonials-detail-grid">
-            <div className="testimonial-detail-card">
-              <div className="testimonial-stars">⭐⭐⭐⭐⭐</div>
-              <p className="testimonial-text">"Absolutely incredible performance! They had everyone on their feet all night. Would highly recommend for any event!"</p>
-              <p className="testimonial-author">- Sarah M., Wedding</p>
-            </div>
-            <div className="testimonial-detail-card">
-              <div className="testimonial-stars">⭐⭐⭐⭐⭐</div>
-              <p className="testimonial-text">"Professional from start to finish. Amazing vocals and stage presence. Our corporate event was a huge success thanks to them!"</p>
-              <p className="testimonial-author">- John D., Corporate Event</p>
-            </div>
-            <div className="testimonial-detail-card">
-              <div className="testimonial-stars">⭐⭐⭐⭐⭐</div>
-              <p className="testimonial-text">"The best tribute act we've ever seen! Authentic costumes, perfect sound, and incredible energy. Book them!"</p>
-              <p className="testimonial-author">- Emma R., Birthday Party</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="cta-section">
         <div className="cta-container">
@@ -300,7 +276,7 @@ function ArtistDetail() {
               📞 Request a Quote
             </button>
             <a href="tel:01418490333" className="btn btn-large btn-cta-secondary">
-              ☎️ Call: 0141 849 0333
+              ☎️ Call: +44 7748 323748
             </a>
           </div>
         </div>

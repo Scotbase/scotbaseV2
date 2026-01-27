@@ -187,6 +187,26 @@ export const parseWordPressAct = async (wpAct) => {
     }
 
     // Map to our app's format
+    // Check if this is a dinner speaker or themed night (they might not have genres)
+    const isDinnerSpeaker = validCategories.some(c => 
+      c.slug?.includes('dinner-speaker') || 
+      c.name?.toLowerCase().includes('dinner speaker')
+    );
+    const isThemedNight = validCategories.some(c => 
+      c.slug?.includes('themed-night') || 
+      c.name?.toLowerCase().includes('themed night')
+    );
+    
+    // Determine genre - don't default to 'Pop' for dinner speakers or themed nights
+    let genreValue = validGenres[0]?.name || null;
+    if (!genreValue && isDinnerSpeaker) {
+      genreValue = 'Dinner Speaker';
+    } else if (!genreValue && isThemedNight) {
+      genreValue = 'Themed Night';
+    } else if (!genreValue) {
+      genreValue = 'Pop'; // Only default to Pop for regular performance acts
+    }
+    
     return {
       id: `wp-${wpAct.id}`, // Prefix with 'wp-' to avoid conflicts
       name: wpAct.title?.rendered || 'Untitled Act',
@@ -195,7 +215,7 @@ export const parseWordPressAct = async (wpAct) => {
       detailImage: detailImageUrl,
       parentCategory: validCategories[0]?.slug || null,
       act_category: validCategories.map(c => c.slug),
-      genre: validGenres[0]?.name || 'Pop',
+      genre: genreValue,
       act_genre: validGenres.map(g => g.slug),
       location: wpAct.acf?.location || 'Scotland',
       price: wpAct.acf?.price || 'POA',

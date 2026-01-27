@@ -31,7 +31,7 @@ function Contact() {
     <div className="contact-page">
       <SEO 
         title="Contact Us"
-        description="Get in touch with Scotbase Entertainment to book tribute acts, dinner speakers, or themed night experiences. We're here to help make your event unforgettable."
+        description="Get in touch with Scotbase to book tribute acts, dinner speakers, or themed night experiences. We're here to help make your event unforgettable."
         url="/contact"
         image="/images/scotbase-logo.png"
       />
@@ -61,7 +61,7 @@ function Contact() {
                 <span className="contact-icon">📞</span>
                 <div>
                   <h3>Phone</h3>
-                  <p>0141 849 0333</p>
+                  <p>+44 7748 323748</p>
                 </div>
               </div>
 

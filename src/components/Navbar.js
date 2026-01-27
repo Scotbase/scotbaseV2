@@ -7,7 +7,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="nav-container">
         <Link to="/" className="nav-logo">
-          Scotbase Entertainment
+          Scotbase
         </Link>
         <ul className="nav-menu">
           <li className="nav-item">
@@ -23,11 +23,6 @@ function Navbar() {
           <li className="nav-item">
             <Link to="/dinner-speakers" className="nav-link">
               Dinner Speakers
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/experiences" className="nav-link">
-              Themed Nights
             </Link>
           </li>
           <li className="nav-item">

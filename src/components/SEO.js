@@ -27,11 +27,11 @@ const SEO = ({
     return `${siteUrl}/images/scotbase-logo.png`;
   }, [siteUrl, image]);
   
-  const defaultTitle = 'Scotbase Entertainment - Scotland\'s Premier Tribute Act Booking Agency';
+  const defaultTitle = 'Scotbase - Scotland\'s Premier Tribute Act Booking Agency';
   const defaultDescription = 'Book professional tribute acts, dinner speakers, and themed night experiences across Scotland. Quality entertainment for weddings, corporate events, and private parties.';
   
   const seoTitle = useMemo(() => {
-    return title ? `${title} | Scotbase Entertainment` : defaultTitle;
+    return title ? `${title} | Scotbase` : defaultTitle;
   }, [title]);
 
   const seoDescription = useMemo(() => {
@@ -42,7 +42,7 @@ const SEO = ({
   const organizationSchema = useMemo(() => ({
     "@context": "https://schema.org",
     "@type": "EntertainmentBusiness",
-    "name": "Scotbase Entertainment",
+    "name": "Scotbase",
     "description": "Scotland's premier tribute act booking agency",
     "url": siteUrl,
     "logo": `${siteUrl}/images/scotbase-logo.png`,
@@ -72,7 +72,7 @@ const SEO = ({
       <meta name="title" content={seoTitle} />
       <meta name="description" content={seoDescription} />
       <meta name="keywords" content="tribute acts, entertainment booking, Scotland, wedding entertainment, corporate events, dinner speakers, themed nights" />
-      <meta name="author" content="Scotbase Entertainment" />
+      <meta name="author" content="Scotbase" />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href={fullUrl} />
 
@@ -82,7 +82,7 @@ const SEO = ({
       <meta property="og:title" content={seoTitle} />
       <meta property="og:description" content={seoDescription} />
       <meta property="og:image" content={imageUrl} />
-      <meta property="og:site_name" content="Scotbase Entertainment" />
+      <meta property="og:site_name" content="Scotbase" />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />

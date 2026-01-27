@@ -2,14 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { fetchTaxonomies } from '../utils/taxonomyHelper';
 import './FilterBar.css';
 
-function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParentCategoryChange, selectedGenre, onGenreChange, artists }) {
-  const [expandedCategory, setExpandedCategory] = useState(null);
-  const [showTagFilters, setShowTagFilters] = useState(false);
-  const [showGenreFilters, setShowGenreFilters] = useState(false); // Collapsed by default
-  const [showCategoryFilters, setShowCategoryFilters] = useState(false); // Collapsed by default
+function FilterBar({ selectedParentCategory, onParentCategoryChange, selectedGenre, onGenreChange, artists }) {
+  const [showGenreFilters, setShowGenreFilters] = useState(true); // Expanded by default
+  const [showCategoryFilters, setShowCategoryFilters] = useState(true); // Expanded by default
   const [showMoreGenres, setShowMoreGenres] = useState(false);
   const [showMoreCategories, setShowMoreCategories] = useState(false);
-  const [showMoreTags, setShowMoreTags] = useState({}); // Object to track show more for each tag category
   const [genreSearch, setGenreSearch] = useState('');
   const [categorySearch, setCategorySearch] = useState('');
   const [genres, setGenres] = useState([]);
@@ -43,54 +40,6 @@ function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParen
   };
 
   const parentCategories = getParentCategories();
-
-  // Extract all unique tags by category
-  const getTagsByCategory = () => {
-    const allTags = artists.flatMap(artist => artist.tags || []);
-    
-    return {
-      genre: [...new Set(allTags.filter(tag => 
-        ['rock', 'pop', 'soul', 'jazz', 'blues', 'ska', 'britpop', 'motown', 'disco'].includes(tag)
-      ))].sort(),
-      
-      era: [...new Set(allTags.filter(tag => 
-        ['60s', '70s', '80s', '90s', '00s', '10s'].includes(tag)
-      ))].sort(),
-      
-      type: [...new Set(allTags.filter(tag => 
-        ['solo', 'duo', 'trio', 'quartet', 'group'].includes(tag)
-      ))].sort(),
-      
-      gender: [...new Set(allTags.filter(tag => 
-        ['male', 'female', 'mixed'].includes(tag)
-      ))].sort(),
-      
-      style: [...new Set(allTags.filter(tag => 
-        ['high-energy', 'ballads', 'dance', 'classic-rock', 'retro', 'boyband', 'girlband'].includes(tag)
-      ))].sort()
-    };
-  };
-
-  const tagCategories = getTagsByCategory();
-
-  const categoryLabels = {
-    genre: 'Genre',
-    era: 'Era',
-    type: 'Act Type',
-    gender: 'Gender',
-    style: 'Style'
-  };
-
-  const handleTagToggle = (tag) => {
-    const newTags = selectedTags.includes(tag)
-      ? selectedTags.filter(t => t !== tag)
-      : [...selectedTags, tag];
-    onTagsChange(newTags);
-  };
-
-  const toggleCategory = (category) => {
-    setExpandedCategory(expandedCategory === category ? null : category);
-  };
 
   // Filter genres by search
   const filteredGenres = genres.filter(genre =>
@@ -141,14 +90,12 @@ function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParen
   // Count active filters
   const activeFilterCount = 
     selectedGenre.length + 
-    selectedParentCategory.length + 
-    selectedTags.length;
+    selectedParentCategory.length;
 
   // Clear all filters
   const handleClearAllFilters = () => {
     onGenreChange([]);
     onParentCategoryChange([]);
-    onTagsChange([]);
     setGenreSearch('');
     setCategorySearch('');
   };
@@ -195,12 +142,6 @@ function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParen
                 </span>
               ) : null;
             })}
-            {selectedTags.map(tag => (
-              <span key={tag} className="active-filter-chip">
-                {tag}
-                <button onClick={() => handleTagToggle(tag)}>×</button>
-              </span>
-            ))}
           </div>
           <button 
             className="clear-all-filters-btn"
@@ -314,84 +255,6 @@ function FilterBar({ selectedTags, onTagsChange, selectedParentCategory, onParen
             </div>
           )}
 
-          {/* Tag Filters Section (existing) */}
-          <div className="filter-section">
-            <button 
-              className="filter-section-header" 
-              onClick={() => setShowTagFilters(!showTagFilters)}
-                  >
-              <h3>Advanced Tag Filters</h3>
-              <span className="arrow">{showTagFilters ? '▼' : '▶'}</span>
-            </button>
-
-            {showTagFilters && (
-              <div className="tag-filters-content">
-                {/* Selected Tags Display */}
-                {selectedTags.length > 0 && (
-                  <div className="selected-tags" style={{ marginBottom: '1rem' }}>
-                    {selectedTags.map(tag => (
-                      <span key={tag} className="selected-tag">
-                        {tag}
-                        <button 
-                          className="remove-tag-btn"
-                          onClick={() => handleTagToggle(tag)}
-                          aria-label={`Remove ${tag}`}
-                        >
-                          ×
-                        </button>
-                      </span>
-                    ))}
-                  </div>
-                )}
-
-                {/* Filter Categories */}
-                <div className="filter-categories">
-                  {Object.entries(tagCategories).map(([category, tags]) => (
-                    tags.length > 0 && (
-                      <div key={category} className="filter-category">
-                        <button
-                          className={`category-header ${expandedCategory === category ? 'expanded' : ''}`}
-                          onClick={() => toggleCategory(category)}
-                        >
-                          <span>{categoryLabels[category]}</span>
-                          <span className="arrow">{expandedCategory === category ? '▼' : '▶'}</span>
-                        </button>
-                        
-                        {expandedCategory === category && (
-                          <>
-                            <div className={`filter-options-container ${shouldShowScrollbar(tags) && showMoreTags[category] ? 'scrollable' : ''}`}>
-                              <div className="tag-list">
-                                {getItemsToDisplay(tags, showMoreTags[category], 5).map(tag => (
-                                  <button
-                                    key={tag}
-                                    className={`tag-button ${selectedTags.includes(tag) ? 'selected' : ''}`}
-                                    onClick={() => handleTagToggle(tag)}
-                                  >
-                                    <span className="tag-checkbox">
-                                      {selectedTags.includes(tag) ? '☑' : '☐'}
-                                    </span>
-                                    <span className="tag-name">{tag}</span>
-                                  </button>
-                                ))}
-                              </div>
-                            </div>
-                            {tags.length > 5 && (
-                              <button
-                                className="show-more-btn"
-                                onClick={() => setShowMoreTags(prev => ({ ...prev, [category]: !prev[category] }))}
-                              >
-                                {showMoreTags[category] ? 'Show Less' : `Show More (${tags.length - 5} more)`}
-                              </button>
-                            )}
-                          </>
-                        )}
-                      </div>
-                    )
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
         </div>
     </div>
   );

@@ -23,6 +23,19 @@ function DinnerSpeakers() {
           act.act_category?.includes('dinner-speakers') || 
           act.categories?.some(cat => cat.toLowerCase().includes('dinner speaker'))
         );
+        
+        // Log genre data for debugging
+        console.log('🎤 Dinner Speakers found:', dinnerSpeakers.length);
+        dinnerSpeakers.forEach(speaker => {
+          console.log(`📝 ${speaker.name}:`, {
+            genre: speaker.genre,
+            act_genre: speaker.act_genre,
+            genres: speaker.genres,
+            act_category: speaker.act_category,
+            categories: speaker.categories
+          });
+        });
+        
         setSpeakers(dinnerSpeakers);
       } catch (error) {
         console.error('Error loading dinner speakers:', error);

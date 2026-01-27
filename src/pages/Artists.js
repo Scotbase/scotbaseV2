@@ -9,7 +9,6 @@ import './Artists.css';
 
 function Artists() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedTags, setSelectedTags] = useState([]);
   const [selectedParentCategory, setSelectedParentCategory] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState([]);
   const [artists, setArtists] = useState([]);
@@ -75,13 +74,7 @@ function Artists() {
       (artist.categories && artist.categories.some(cat => cat.toLowerCase().includes(searchTerm.toLowerCase()))) ||
       (artist.tags && artist.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())));
     
-    // Tag filter - artist must have ALL selected tags
-    const matchesTags = selectedTags.length === 0 || 
-      selectedTags.every(selectedTag => 
-        artist.tags && artist.tags.includes(selectedTag)
-      );
-    
-    return matchesGenre && matchesParentCategory && matchesSearch && matchesTags;
+    return matchesGenre && matchesParentCategory && matchesSearch;
   });
 
   if (loading) {
@@ -103,8 +96,6 @@ function Artists() {
           <div className="artists-layout">
             <aside className="filters-sidebar">
               <FilterBar 
-                selectedTags={selectedTags}
-                onTagsChange={setSelectedTags}
                 selectedGenre={selectedGenre}
                 onGenreChange={setSelectedGenre}
                 selectedParentCategory={selectedParentCategory}
@@ -145,8 +136,6 @@ function Artists() {
           {/* Sidebar with Filters */}
           <aside className="filters-sidebar">
             <FilterBar 
-              selectedTags={selectedTags}
-              onTagsChange={setSelectedTags}
               selectedGenre={selectedGenre}
               onGenreChange={setSelectedGenre}
               selectedParentCategory={selectedParentCategory}
@@ -160,9 +149,8 @@ function Artists() {
             {/* Results Count */}
             <div className="results-info">
               <p>
-                Showing {filteredArtists.length} performance act{filteredArtists.length !== 1 ? 's' : ''}
-                {(selectedGenre.length > 0 || selectedParentCategory.length > 0) && ' matching your filters'}
-                {selectedTags.length > 0 && ` with ${selectedTags.length} tag${selectedTags.length !== 1 ? 's' : ''}`}
+            Showing {filteredArtists.length} performance act{filteredArtists.length !== 1 ? 's' : ''}
+            {(selectedGenre.length > 0 || selectedParentCategory.length > 0) && ' matching your filters'}
               </p>
             </div>
 
@@ -177,18 +165,17 @@ function Artists() {
               <div className="no-results">
                 <h3>No performance acts found</h3>
                 <p>Try adjusting your search or filter criteria</p>
-                {(selectedTags.length > 0 || selectedParentCategory.length > 0 || selectedGenre.length > 0) && (
-                  <button 
-                    className="clear-filters-btn"
-                    onClick={() => {
-                      setSelectedTags([]);
-                      setSelectedParentCategory([]);
-                      setSelectedGenre([]);
-                    }}
-                  >
-                    Clear All Filters
-                  </button>
-                )}
+            {(selectedParentCategory.length > 0 || selectedGenre.length > 0) && (
+              <button 
+                className="clear-filters-btn"
+                onClick={() => {
+                  setSelectedParentCategory([]);
+                  setSelectedGenre([]);
+                }}
+              >
+                Clear All Filters
+              </button>
+            )}
               </div>
             )}
           </main>

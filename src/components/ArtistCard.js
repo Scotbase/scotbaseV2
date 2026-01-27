@@ -46,7 +46,6 @@ function ArtistCard({ artist }) {
 
         <div className="artist-info">
           <h3 className="artist-name">{decodeHtmlEntitiesSimple(artist.name)}</h3>
-          <p className="artist-tribute">{decodeHtmlEntitiesSimple(artist.tribute)}</p>
           
           {/* Star rating */}
           {artist.rating && (
@@ -68,9 +67,13 @@ function ArtistCard({ artist }) {
             </p>
           )}
 
-          <div className="artist-meta">
-            <span className="artist-genre">🎵 {artist.genre}</span>
-          </div>
+          {artist.genre && 
+           artist.genre !== 'Dinner Speaker' && 
+           artist.genre !== 'Themed Night' && (
+            <div className="artist-meta">
+              <span className="artist-genre">🎵 {artist.genre}</span>
+            </div>
+          )}
 
           {/* Genre tags */}
           {artist.tags && artist.tags.length > 0 && (
