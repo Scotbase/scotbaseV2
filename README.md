@@ -137,5 +137,5 @@ This is a private project for Scotbase Entertainment.
 
 ## License
 
-Copyright © 2024 Scotbase Entertainment. All rights reserved.
+Copyright © 2026 Scotbase Entertainment Ltd. All rights reserved.
 
