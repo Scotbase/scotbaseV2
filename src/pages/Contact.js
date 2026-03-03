@@ -24,7 +24,6 @@ function Contact() {
     e.preventDefault();
     // This is a placeholder - in production, you'd send this to your backend
     alert('Thank you for your enquiry! We\'ll get back to you soon.');
-    console.log('Form submitted:', formData);
   };
 
   return (
@@ -61,7 +60,7 @@ function Contact() {
                 <span className="contact-icon">📞</span>
                 <div>
                   <h3>Phone</h3>
-                  <p>+44 7748 323748</p>
+                  <p>+44 1418 490333</p>
                 </div>
               </div>
 
@@ -79,8 +78,13 @@ function Contact() {
                 <span className="contact-icon">⏰</span>
                 <div>
                   <h3>Hours</h3>
-                  <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
-                  <p>Sat: 10:00 AM - 4:00 PM</p>
+                  <p>Monday: 9:00 AM - 8:30 PM</p>
+                  <p>Tuesday: 9:00 AM - 8:30 PM</p>
+                  <p>Wednesday: 9:00 AM - 8:30 PM</p>
+                  <p>Thursday: 9:00 AM - 8:30 PM</p>
+                  <p>Friday: 9:00 AM - 8:30 PM</p>
+                  <p>Saturday: 9:00 AM - 8:30 PM</p>
+                  <p>Sunday: 10:00 AM - 6:30 PM</p>
                 </div>
               </div>
             </div>

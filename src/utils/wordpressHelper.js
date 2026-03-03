@@ -237,27 +237,23 @@ export const parseWordPressAct = async (wpAct) => {
 };
 
 /**
- * Fetch all acts from WordPress
+ * Fetch acts from WordPress
+ * By default this fetches up to 100 acts, but an optional
+ * perPage parameter allows fetching a smaller subset for
+ * lightweight views like the home page.
  */
-export const fetchActsFromWordPress = async () => {
+export const fetchActsFromWordPress = async (perPage = 100) => {
   try {
-    console.log('🔍 Fetching acts from WordPress API (scotbase.net)...');
     
     // Fetch with _embed and acf_format=standard to get full ACF data
     // The acf_format=standard parameter should return full image objects instead of IDs
-    const response = await fetch(`${WP_API_BASE}/act?per_page=100&_embed&acf_format=standard`);
+    const response = await fetch(`${WP_API_BASE}/act?per_page=${perPage}&_embed&acf_format=standard`);
     
     if (!response.ok) {
       throw new Error(`WordPress API error: ${response.status}`);
     }
 
     const wpActs = await response.json();
-    console.log(`✅ Received ${wpActs.length} acts from WordPress`);
-    
-    // Log first act's ACF data to debug
-    if (wpActs.length > 0 && wpActs[0].acf) {
-      console.log('🔍 Sample ACF data:', wpActs[0].acf);
-    }
 
     // Parse all acts in parallel
     const parsedActs = await Promise.all(
@@ -267,7 +263,6 @@ export const fetchActsFromWordPress = async () => {
     // Filter out any null results from parsing errors
     const validActs = parsedActs.filter(act => act !== null);
     
-    console.log(`📊 Successfully parsed ${validActs.length} WordPress acts`);
     return validActs;
   } catch (error) {
     console.error('❌ Error fetching acts from WordPress:', error);

@@ -43,7 +43,6 @@ export const fetchActGenres = async () => {
     }));
     
     lastFetchTime = Date.now();
-    console.log(`✅ Fetched ${genresCache.length} genres from WordPress`);
     return genresCache;
   } catch (error) {
     console.error('❌ Error fetching genres:', error);
@@ -76,7 +75,6 @@ export const fetchActCategories = async () => {
     }));
     
     lastFetchTime = Date.now();
-    console.log(`✅ Fetched ${categoriesCache.length} categories from WordPress`);
     return categoriesCache;
   } catch (error) {
     console.error('❌ Error fetching categories:', error);

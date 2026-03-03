@@ -6,7 +6,7 @@ import Testimonials from '../components/Testimonials';
 import StatsCounter from '../components/StatsCounter';
 import SEO from '../components/SEO';
 // import CMSTestAct from '../components/CMSTestAct'; // Commented out - demo section removed
-import { getPopularArtists, getAllArtists } from '../data/dataLoader';
+import { getHomePageActs } from '../data/dataLoader';
 // import { getCMSActs } from '../data/dataLoader'; // Commented out - CMS demo removed
 import './Home.css';
 
@@ -24,17 +24,14 @@ function Home() {
       const minLoadingTime = 500; // Minimum 500ms to show skeleton
       
       try {
-        // Get all artists to populate hero slideshow
-        const allActs = await getAllArtists();
-        
-        // Get popular artists (now includes WordPress data)
-        const popular = await getPopularArtists(6);
-        
-        setPopularArtists(popular);
-        
-        // Use images from acts for hero slideshow
+        // Get a limited set of acts for the home page only
+        const homeActs = await getHomePageActs(6);
+
+        setPopularArtists(homeActs);
+
+        // Use images from these acts for hero slideshow
         // Filter to get acts with images and take up to 5
-        const actsWithImages = allActs
+        const actsWithImages = homeActs
           .filter(act => act.image && !act.image.includes('placeholder'))
           .slice(0, 5);
         
@@ -221,7 +218,7 @@ function Home() {
                   <span className="contact-icon">📞</span>
                   <div>
                     <strong>Phone</strong>
-                    <p><a href="tel:01418490333">+44 7748 323748</a></p>
+                    <p><a href="tel:01418490333">+44 1418 490333</a></p>
                   </div>
                 </div>
                 <div className="contact-item">

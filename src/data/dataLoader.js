@@ -10,6 +10,10 @@ let cachedActs = null;
 let lastFetchTime = null;
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
+// Separate cache for lightweight home page acts
+let cachedHomeActs = null;
+let lastHomeFetchTime = null;
+
 /**
  * Get all artists/acts - tries CMS first, falls back to hardcoded data
  * Results are cached for 5 minutes to avoid repeated fetches
@@ -27,7 +31,6 @@ export const getAllArtists = async () => {
     if (wpActs && wpActs.length > 0) {
       cachedActs = wpActs;
       lastFetchTime = Date.now();
-      console.log(`🎉 Loaded ${wpActs.length} acts from WordPress (scotbase.net)`);
       return cachedActs;
     }
   } catch (error) {
@@ -37,8 +40,36 @@ export const getAllArtists = async () => {
   // No data available
   cachedActs = [];
   lastFetchTime = Date.now();
-  console.log(`⚠️ No acts loaded - WordPress unavailable`);
   return cachedActs;
+};
+
+/**
+ * Get a limited set of artists/acts for lightweight views
+ * like the home page. This avoids loading the full catalogue
+ * on initial landing.
+ */
+export const getHomePageActs = async (limit = 6) => {
+  // Return cached data if it's fresh
+  if (cachedHomeActs && lastHomeFetchTime && (Date.now() - lastHomeFetchTime < CACHE_DURATION)) {
+    return cachedHomeActs.slice(0, limit);
+  }
+
+  try {
+    const wpActs = await fetchActsFromWordPress(limit);
+
+    if (wpActs && wpActs.length > 0) {
+      cachedHomeActs = wpActs;
+      lastHomeFetchTime = Date.now();
+      return cachedHomeActs.slice(0, limit);
+    }
+  } catch (error) {
+    console.warn('⚠️ Failed to load home page acts from WordPress:', error);
+  }
+
+  // Fallback to empty array – home page will use default hero images
+  cachedHomeActs = [];
+  lastHomeFetchTime = Date.now();
+  return cachedHomeActs;
 };
 
 /**
