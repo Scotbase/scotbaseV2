@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteBase /
+
+# Don’t rewrite existing files or folders
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Send everything else to index.html (React SPA)
+RewriteRule . /index.html [L]
