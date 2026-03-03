@@ -83,6 +83,28 @@
   font-size: 1rem;
 }
 
+/* Opening hours layout */
+.opening-hours {
+  margin-top: 0.25rem;
+}
+
+.opening-hours-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.opening-hours-day {
+  display: inline-block;
+  min-width: 90px;
+  font-weight: 500;
+  color: #444;
+}
+
+.opening-hours-time {
+  color: #666;
+}
+
 .social-section h3 {
   font-size: 1.3rem;
   color: #333;
