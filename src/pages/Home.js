@@ -68,10 +68,24 @@ function Home() {
     loadData();
   }, []);
 
-  // Hero slideshow effect
+  // Hero slideshow effect - show each slide once then stop
   useEffect(() => {
+    if (heroImages.length === 0) return;
+
+    setCurrentSlide(0);
+
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+      setCurrentSlide((prev) => {
+        const next = prev + 1;
+
+        // If we've reached the last slide, stop advancing
+        if (next >= heroImages.length) {
+          clearInterval(interval);
+          return prev;
+        }
+
+        return next;
+      });
     }, 5000); // Change slide every 5 seconds
 
     return () => clearInterval(interval);
