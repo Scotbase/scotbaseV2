@@ -78,7 +78,6 @@ function Artists() {
   });
 
   if (loading) {
-    console.log('🔄 Showing skeleton loaders...');
     return (
       <div className="artists-page">
         <SEO 

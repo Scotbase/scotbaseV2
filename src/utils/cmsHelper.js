@@ -27,7 +27,6 @@ export const fetchActsFromCMS = async () => {
       if (act) acts.push(act);
     }
     
-    console.log(`📂 Loaded ${acts.length} act file(s) from CMS`);
     return acts;
   } catch (error) {
     console.error('Error fetching acts from CMS:', error);

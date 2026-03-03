@@ -39,9 +39,6 @@ function ArtistCard({ artist }) {
           )}
           
           {artist.featured && <span className="featured-badge">⭐ Featured</span>}
-          <div className="availability-badge" data-status={artist.availability.toLowerCase()}>
-            {artist.availability}
-          </div>
         </div>
 
         <div className="artist-info">

@@ -276,7 +276,7 @@ function ArtistDetail() {
               📞 Request a Quote
             </button>
             <a href="tel:01418490333" className="btn btn-large btn-cta-secondary">
-              ☎️ Call: +44 7748 323748
+              ☎️ Call: +44 1418 490333
             </a>
           </div>
         </div>

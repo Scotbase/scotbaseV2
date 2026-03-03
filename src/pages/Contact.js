@@ -24,7 +24,6 @@ function Contact() {
     e.preventDefault();
     // This is a placeholder - in production, you'd send this to your backend
     alert('Thank you for your enquiry! We\'ll get back to you soon.');
-    console.log('Form submitted:', formData);
   };
 
   return (
@@ -61,7 +60,7 @@ function Contact() {
                 <span className="contact-icon">📞</span>
                 <div>
                   <h3>Phone</h3>
-                  <p>+44 7748 323748</p>
+                  <p>+44 1418 490333</p>
                 </div>
               </div>
 
@@ -78,9 +77,37 @@ function Contact() {
               <div className="contact-detail">
                 <span className="contact-icon">⏰</span>
                 <div>
-                  <h3>Hours</h3>
-                  <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
-                  <p>Sat: 10:00 AM - 4:00 PM</p>
+                  <h3>Opening Hours</h3>
+                  <div className="opening-hours">
+                    <div className="opening-hours-row">
+                      <span className="opening-hours-day">Monday</span>
+                      <span className="opening-hours-time">9:00 AM - 8:30 PM</span>
+                    </div>
+                    <div className="opening-hours-row">
+                      <span className="opening-hours-day">Tuesday</span>
+                      <span className="opening-hours-time">9:00 AM - 8:30 PM</span>
+                    </div>
+                    <div className="opening-hours-row">
+                      <span className="opening-hours-day">Wednesday</span>
+                      <span className="opening-hours-time">9:00 AM - 8:30 PM</span>
+                    </div>
+                    <div className="opening-hours-row">
+                      <span className="opening-hours-day">Thursday</span>
+                      <span className="opening-hours-time">9:00 AM - 8:30 PM</span>
+                    </div>
+                    <div className="opening-hours-row">
+                      <span className="opening-hours-day">Friday</span>
+                      <span className="opening-hours-time">9:00 AM - 8:30 PM</span>
+                    </div>
+                    <div className="opening-hours-row">
+                      <span className="opening-hours-day">Saturday</span>
+                      <span className="opening-hours-time">9:00 AM - 8:30 PM</span>
+                    </div>
+                    <div className="opening-hours-row">
+                      <span className="opening-hours-day">Sunday</span>
+                      <span className="opening-hours-time">10:00 AM - 6:30 PM</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

@@ -21,7 +21,7 @@ function Footer() {
         <div className="footer-section">
           <h4>Contact</h4>
           <p>📧 info@scotbase.com</p>
-          <p>📞 +44 7748 323748</p>
+          <p>📞 +44 1418 490333</p>
           <p>📍 103 Abercorn Street</p>
           <p style={{ marginLeft: '1.5rem' }}>Paisley, PA3 4AT</p>
         </div>
