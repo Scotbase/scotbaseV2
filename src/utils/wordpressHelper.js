@@ -3,6 +3,19 @@
 
 const WP_API_BASE = 'https://cms.scotbase.net/wp-json/wp/v2';
 
+const createSlugFromText = (text) => {
+  if (!text || typeof text !== 'string') return null;
+
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+};
+
 /**
  * Decode HTML entities (e.g., &amp; to &)
  */
@@ -207,10 +220,24 @@ export const parseWordPressAct = async (wpAct) => {
       genreValue = 'Pop'; // Only default to Pop for regular performance acts
     }
     
+    const rawName = wpAct.title?.rendered || 'Untitled Act';
+    const rawTribute = wpAct.acf?.tribute_to || wpAct.title?.rendered || '';
+    const rawDescription =
+      wpAct.acf?.description ||
+      wpAct.content?.rendered?.replace(/<[^>]*>/g, '') ||
+      wpAct.excerpt?.rendered?.replace(/<[^>]*>/g, '') ||
+      '';
+
+    const decodedName = decodeHTMLEntities(rawName);
+
+    const generatedSlug = createSlugFromText(decodedName);
+
     return {
       id: `wp-${wpAct.id}`, // Prefix with 'wp-' to avoid conflicts
-      name: wpAct.title?.rendered || 'Untitled Act',
-      tribute: wpAct.acf?.tribute_to || wpAct.title?.rendered || '',
+      slug: generatedSlug || wpAct.slug || `act-${wpAct.id}`,
+      sourceSlug: wpAct.slug || null,
+      name: decodedName,
+      tribute: decodeHTMLEntities(rawTribute),
       image: imageUrl,
       detailImage: detailImageUrl,
       parentCategory: validCategories[0]?.slug || null,
@@ -219,7 +246,7 @@ export const parseWordPressAct = async (wpAct) => {
       act_genre: validGenres.map(g => g.slug),
       location: wpAct.acf?.location || 'Scotland',
       price: wpAct.acf?.price || 'POA',
-      description: wpAct.acf?.description || wpAct.content?.rendered?.replace(/<[^>]*>/g, '') || wpAct.excerpt?.rendered?.replace(/<[^>]*>/g, '') || '',
+      description: decodeHTMLEntities(rawDescription),
       featured: wpAct.acf?.featured || false,
       availability: wpAct.acf?.availability || 'Available',
       bookingCount: wpAct.acf?.booking_count || 0,

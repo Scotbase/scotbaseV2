@@ -77,7 +77,13 @@ export const getHomePageActs = async (limit = 6) => {
  */
 export const getArtistById = async (id) => {
   const allArtists = await getAllArtists();
-  return allArtists.find(artist => String(artist.id) === String(id));
+  const normalizedId = String(id);
+  return allArtists.find(
+    (artist) =>
+      String(artist.id) === normalizedId ||
+      String(artist.slug) === normalizedId ||
+      String(artist.sourceSlug) === normalizedId
+  );
 };
 
 /**

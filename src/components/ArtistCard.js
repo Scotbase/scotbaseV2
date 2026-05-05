@@ -5,6 +5,8 @@ import { decodeHtmlEntitiesSimple } from '../utils/htmlDecoder';
 import './ArtistCard.css';
 
 function ArtistCard({ artist }) {
+  const artistIdentifier = artist.slug || artist.id;
+
   // Star rating display
   const renderStars = (rating) => {
     const stars = [];
@@ -19,7 +21,7 @@ function ArtistCard({ artist }) {
   };
 
   return (
-    <Link to={`/artist/${artist.id}`} className="artist-card-link">
+    <Link to={`/artist/${artistIdentifier}`} className="artist-card-link">
       <div className="artist-card">
         <div className="artist-image-container">
           <img 

@@ -2,16 +2,25 @@ import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import './Contact.css';
 
+const CONTACT_FORM_ENDPOINT = 'https://cms.scotbase.net/wp-json/api/v1/contact-form/submit';
+
 function Contact() {
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     name: '',
     email: '',
     phone: '',
-    eventDate: '',
-    eventType: '',
-    artist: '',
+    website: '',
+    // eventDate: '',
+    // eventType: '',
+    // artist: '',
     message: ''
+  };
+
+  const [formData, setFormData] = useState({
+    ...initialFormData
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
   const handleChange = (e) => {
     setFormData({
@@ -20,10 +29,58 @@ function Contact() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // This is a placeholder - in production, you'd send this to your backend
-    alert('Thank you for your enquiry! We\'ll get back to you soon.');
+
+    // Honeypot: real users never fill this hidden field.
+    // If populated, silently treat as a successful submit.
+    if (formData.website) {
+      setSubmitStatus({
+        type: 'success',
+        message: 'Thanks! Your enquiry has been sent. We will get back to you within 24 hours.'
+      });
+      setFormData(initialFormData);
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        website: formData.website,
+        message: formData.message
+      };
+
+      const response = await fetch(CONTACT_FORM_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error(`Contact form request failed: ${response.status}`);
+      }
+
+      setFormData(initialFormData);
+      setSubmitStatus({
+        type: 'success',
+        message: 'Thanks! Your enquiry has been sent. We will get back to you within 24 hours.'
+      });
+    } catch (error) {
+      console.error('Contact form submission failed:', error);
+      setSubmitStatus({
+        type: 'error',
+        message: 'Sorry, there was a problem sending your message. Please try again or call us on +44 1418 490333.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -125,6 +182,19 @@ function Contact() {
           <div className="contact-form-container">
             <h2>Send Us a Message</h2>
             <form onSubmit={handleSubmit} className="contact-form">
+              <div className="form-trap-field" aria-hidden="true">
+                <label htmlFor="website">Website</label>
+                <input
+                  type="text"
+                  id="website"
+                  name="website"
+                  value={formData.website}
+                  onChange={handleChange}
+                  tabIndex="-1"
+                  autoComplete="off"
+                />
+              </div>
+
               <div className="form-group">
                 <label htmlFor="name">Name *</label>
                 <input
@@ -163,7 +233,7 @@ function Contact() {
                 />
               </div>
 
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label htmlFor="eventDate">Event Date</label>
                 <input
                   type="date"
@@ -172,9 +242,9 @@ function Contact() {
                   value={formData.eventDate}
                   onChange={handleChange}
                 />
-              </div>
+              </div> */}
 
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label htmlFor="eventType">Event Type</label>
                 <select
                   id="eventType"
@@ -189,9 +259,9 @@ function Contact() {
                   <option value="festival">Festival</option>
                   <option value="other">Other</option>
                 </select>
-              </div>
+              </div> */}
 
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label htmlFor="artist">Interested Artist</label>
                 <input
                   type="text"
@@ -201,7 +271,7 @@ function Contact() {
                   onChange={handleChange}
                   placeholder="Artist or tribute act name"
                 />
-              </div>
+              </div> */}
 
               <div className="form-group">
                 <label htmlFor="message">Message *</label>
@@ -216,9 +286,14 @@ function Contact() {
                 ></textarea>
               </div>
 
-              <button type="submit" className="btn btn-primary btn-submit">
-                Send Message
+              <button type="submit" className="btn btn-primary btn-submit" disabled={isSubmitting}>
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
+              {submitStatus && (
+                <p className={`form-status form-status-${submitStatus.type}`}>
+                  {submitStatus.message}
+                </p>
+              )}
             </form>
           </div>
         </div>

@@ -64,7 +64,7 @@ function ArtistDetail() {
           // Get related artists
           const allArtists = await getAllArtists();
           const related = allArtists
-            .filter(a => a.genre === foundArtist.genre && String(a.id) !== String(id))
+            .filter(a => a.genre === foundArtist.genre && String(a.id) !== String(foundArtist.id))
             .slice(0, 3);
           setRelatedArtists(related);
         }
@@ -107,13 +107,14 @@ function ArtistDetail() {
   }
 
   const videoId = getYouTubeVideoId(artist.videoUrl);
+  const artistIdentifier = artist.slug || artist.id;
 
   return (
     <div className="artist-detail-page">
       <SEO 
         title={decodeHtmlEntitiesSimple(artist.name)}
         description={decodeHtmlEntitiesSimple(artist.description || `${artist.name} - Professional tribute act available for booking in Scotland. ${artist.genre ? `Specializing in ${artist.genre} music.` : ''} Perfect for weddings, corporate events, and private parties.`)}
-        url={`/artist/${artist.id}`}
+        url={`/artist/${artistIdentifier}`}
         image={artist.image}
         type="article"
         artist={artist}
@@ -291,7 +292,7 @@ function ArtistDetail() {
               {relatedArtists.map(relatedArtist => (
                 <Link 
                   key={relatedArtist.id} 
-                  to={`/artist/${relatedArtist.id}`}
+                  to={`/artist/${relatedArtist.slug || relatedArtist.id}`}
                   className="related-artist-card"
                 >
                   <div className="related-image-wrapper">

@@ -6,6 +6,7 @@ import './FeaturedArtist.css';
 
 function FeaturedArtist({ artist }) {
   if (!artist) return null;
+  const artistIdentifier = artist.slug || artist.id;
 
   const handleVideoClick = () => {
     if (artist.videoUrl) {
@@ -76,7 +77,7 @@ function FeaturedArtist({ artist }) {
 
           {/* Action Buttons */}
           <div className="featured-action-buttons">
-            <Link to={`/artist/${artist.id}`} className="btn btn-primary">
+            <Link to={`/artist/${artistIdentifier}`} className="btn btn-primary">
               View Full Profile
             </Link>
             {artist.videoUrl && (

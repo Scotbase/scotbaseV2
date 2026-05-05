@@ -61,7 +61,7 @@ const SEO = ({
       "description": artist.description || `${artist.name} - Professional tribute act available for booking`,
       "image": artist.image ? (artist.image.startsWith('http') ? artist.image : `${siteUrl}${artist.image}`) : undefined,
       "genre": artist.genre || artist.act_genre?.[0],
-      "url": `${siteUrl}/artist/${artist.id}`
+      "url": `${siteUrl}/artist/${artist.slug || artist.id}`
     };
   }, [artist, siteUrl]);
 
